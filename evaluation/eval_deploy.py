@@ -55,10 +55,25 @@ def iou_matrix(a, b):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--ckpt', default=str(ROOT / 'weights' / 'best_stg1.pth'))
+
+    # 兼容两种数据布局(网盘压缩包解压后 / 手工整理后):
+    #   A. test/images/*.jpg  + test/annotations.json
+    #   B. test/*.jpg         + annotations/car_union_bal1280_test.json
+    def _pick(cands, fallback):
+        for c in cands:
+            if c.exists():
+                return str(c)
+        return str(fallback)
+
+    ap.add_argument('--ckpt', default=_pick([ROOT / 'weights' / 'best_stg1.pth'],
+                                            ROOT / 'weights' / 'best_stg1.pth'))
     ap.add_argument('--config', default='configs/deim_rtdetrv2/deim_car_union_v4.yml')
-    ap.add_argument('--json', default=str(ROOT / 'test' / 'annotations.json'))
-    ap.add_argument('--imgroot', default=str(ROOT / 'test' / 'images'))
+    ap.add_argument('--json', default=_pick([ROOT / 'test' / 'annotations.json',
+                                             ROOT / 'annotations' / 'car_union_bal1280_test.json'],
+                                            ROOT / 'test' / 'annotations.json'))
+    ap.add_argument('--imgroot', default=_pick([ROOT / 'test' / 'images',
+                                                ROOT / 'test'],
+                                               ROOT / 'test' / 'images'))
     ap.add_argument('--imgsz', type=int, default=1024)
     ap.add_argument('--conf', type=float, default=0.005)
     ap.add_argument('--scan', action='store_true')
