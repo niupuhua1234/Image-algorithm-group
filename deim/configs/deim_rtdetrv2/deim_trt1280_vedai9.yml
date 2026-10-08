@@ -1,0 +1,5 @@
+__include__: [
+  './deim_vedai9.yml',
+]
+
+eval_spatial_size: [1280, 1280]

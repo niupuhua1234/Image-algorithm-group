@@ -1,0 +1,80 @@
+__include__: [
+  './deim_r18vd_120e_coco.yml',
+]
+
+num_classes: 6
+remap_mscoco_category: False
+eval_spatial_size: ~
+
+# ===== 迁移学习: 冻结主干浅层(conv1 + layer1 + layer2) =====
+# 保留通用纹理/形状特征, 让 Neck+Head 学习目标域的颜色/场景分布
+PResNet:
+  depth: 18
+  freeze_at: 2
+  freeze_norm: True
+  pretrained: False
+
+# 低 lr(比源域训练低一个量级, 防破坏预训练特征)
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^(?=.*(?:norm|bn)).*$'
+      weight_decay: 0.
+  lr: 0.00005
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+train_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: D:/BaiduNetdiskDownload/wdd_work/data/transfer_tgt_1280/train
+    ann_file: D:/BaiduNetdiskDownload/wdd_work/deim/data_transfer/tgt_train.json
+    return_masks: False
+    transforms:
+      policy:
+        epoch: [3, 18, 29]
+      ops:
+        # 少样本迁移: 降低 Mosaic 概率(防噪声), 加强颜色增强(对抗 H/S/对比度域偏移)
+        - {type: Mosaic, output_size: 320, rotation_range: 10, translation_range: [0.1, 0.1], scaling_range: [0.5, 1.5],
+           probability: 0.5, fill_value: 0, use_cache: False, max_cached_images: 50, random_pop: True}
+        - {type: RandomPhotometricDistort, p: 0.8}
+        - {type: RandomZoomOut, fill: 0}
+        - {type: RandomIoUCrop, p: 0.5}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [960, 960], }
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: 'float32', scale: True}
+        - {type: ConvertBoxes, fmt: 'cxcywh', normalize: True}
+  shuffle: True
+  num_workers: 4
+  drop_last: True
+  total_batch_size: 8
+  collate_fn:
+    type: BatchImageCollateFunction
+    base_size: 960
+    base_size_repeat: 1
+    stop_epoch: 30
+
+val_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: D:/BaiduNetdiskDownload/wdd_work/data/transfer_tgt_1280/val
+    ann_file: D:/BaiduNetdiskDownload/wdd_work/deim/data_transfer/tgt_val.json
+    return_masks: False
+  shuffle: False
+  num_workers: 4
+  drop_last: False
+  total_batch_size: 16
+  collate_fn:
+    type: BatchImageCollateFunction
+    base_size: 960
+
+output_dir: ./output/deim_transfer
+
+epoches: 30
+flat_epoch: 15
+no_aug_epoch: 2

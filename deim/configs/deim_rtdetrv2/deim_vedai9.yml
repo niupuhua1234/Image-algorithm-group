@@ -1,0 +1,37 @@
+__include__: [
+  './deim_r18vd_120e_coco.yml',
+]
+
+num_classes: 9
+remap_mscoco_category: False
+eval_spatial_size: ~
+
+train_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: D:/BaiduNetdiskDownload/wdd_work/data/vedai1024/images/train
+    ann_file: D:/BaiduNetdiskDownload/wdd_work/deim/data_vedai/vedai_train.json
+    return_masks: False
+  shuffle: True
+  num_workers: 4
+  drop_last: True
+  collate_fn:
+    type: BatchImageCollateFunction
+
+val_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: D:/BaiduNetdiskDownload/wdd_work/data/vedai1024/images/val
+    ann_file: D:/BaiduNetdiskDownload/wdd_work/deim/data_vedai/vedai_val.json
+    return_masks: False
+  shuffle: False
+  num_workers: 4
+  drop_last: False
+  collate_fn:
+    type: BatchImageCollateFunction
+
+output_dir: ./output/deim_vedai
+
+epoches: 120

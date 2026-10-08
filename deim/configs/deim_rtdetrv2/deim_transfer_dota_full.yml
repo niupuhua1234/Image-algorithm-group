@@ -1,0 +1,88 @@
+__include__: [
+  './deim_r18vd_120e_coco.yml',
+]
+
+num_classes: 6
+remap_mscoco_category: False
+eval_spatial_size: ~
+
+# ===== DOTA 扩容重训 (冲高精度): 3.1x 数据 + 1280 训练分辨率 + 解冻更深 + 保护小目标 =====
+# 相对 deim_transfer_dota.yml 的改动:
+#   1. 数据 1995 -> 6193 块 (dota_1920/train 全部含目标图)
+#   2. Resize/base_size 960 -> 1280 (car 中位 19px, 960 下会被缩到 14px)
+#   3. freeze_at 2 -> 1 (域偏移大 + 数据变多, 解冻 stage2)
+#   4. Mosaic output_size 320 -> 640 且 p 0.5 -> 0.3 (320 会把 19px 目标压成 2.4px)
+#   5. RandomIoUCrop p 0.5 -> 0.3 (裁剪同样伤害小目标)
+#   6. epoches 30 -> 24 (步数 24x3096 vs 30x498, 约 5x 总步数)
+PResNet:
+  depth: 18
+  freeze_at: 1
+  freeze_norm: True
+  pretrained: False
+
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^(?=.*(?:norm|bn)).*$'
+      weight_decay: 0.
+  lr: 0.00005
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+train_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: D:/BaiduNetdiskDownload/wdd_work/data/dota_tgt_full/train
+    ann_file: D:/BaiduNetdiskDownload/wdd_work/deim/data_dota/dota_full_train.json
+    return_masks: False
+    transforms:
+      policy:
+        epoch: [3, 14, 23]
+      ops:
+        - {type: Mosaic, output_size: 640, rotation_range: 10, translation_range: [0.1, 0.1], scaling_range: [0.5, 1.5],
+           probability: 0.3, fill_value: 0, use_cache: False, max_cached_images: 50, random_pop: True}
+        - {type: RandomPhotometricDistort, p: 0.8}
+        - {type: RandomZoomOut, fill: 0}
+        - {type: RandomIoUCrop, p: 0.3}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [1280, 1280], }
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: 'float32', scale: True}
+        - {type: ConvertBoxes, fmt: 'cxcywh', normalize: True}
+  shuffle: True
+  num_workers: 4
+  drop_last: True
+  total_batch_size: 2        # 1280^2 是 960^2 的 1.78x, batch 2 以控显存
+  collate_fn:
+    type: BatchImageCollateFunction
+    base_size: 1280
+    base_size_repeat: 1
+    stop_epoch: 24
+
+val_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: D:/BaiduNetdiskDownload/wdd_work/data/dota_tgt_full/val
+    ann_file: D:/BaiduNetdiskDownload/wdd_work/deim/data_dota/dota_full_val.json
+    return_masks: False
+    transforms:
+      ops:
+        - {type: Resize, size: [1280, 1280], }
+        - {type: ConvertPILImage, dtype: 'float32', scale: True}
+  shuffle: False
+  num_workers: 4
+  drop_last: False
+  total_batch_size: 4
+  collate_fn:
+    type: BatchImageCollateFunction
+    base_size: 1280
+
+output_dir: ./output/deim_transfer_dota_full
+
+epoches: 24
+flat_epoch: 12
+no_aug_epoch: 2

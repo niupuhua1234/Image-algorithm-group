@@ -1,0 +1,41 @@
+__include__: [
+  './deim_r18vd_120e_coco.yml',
+]
+
+num_classes: 6
+remap_mscoco_category: False
+eval_spatial_size: ~
+
+train_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: D:/BaiduNetdiskDownload/datasets/car_union_full/train/images
+    ann_file: D:/BaiduNetdiskDownload/wdd_work/deim/data6/car_union_full_train.json
+    return_masks: False
+  shuffle: True
+  num_workers: 4
+  drop_last: True
+  collate_fn:
+    type: BatchImageCollateFunction
+    stop_epoch: 70
+    base_size: 640
+    base_size_repeat: 3
+
+val_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: D:/BaiduNetdiskDownload/datasets/car_union_full/val/images
+    ann_file: D:/BaiduNetdiskDownload/wdd_work/deim/data6/car_union_full_val.json
+    return_masks: False
+  shuffle: False
+  num_workers: 4
+  drop_last: False
+  collate_fn:
+    type: BatchImageCollateFunction
+    base_size: 640
+
+output_dir: ./output/deim_car_union_full
+
+epoches: 120
