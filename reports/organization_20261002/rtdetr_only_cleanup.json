@@ -1,0 +1,257 @@
+{
+  "backup": "D:\\InfraredSmallTargetDetection_archive_20261002\\code_cleanup_20261002_220239",
+  "deleted": [
+    {
+      "path": "04_train_aa_yolo.py",
+      "files": 1
+    },
+    {
+      "path": "05_test_aa_yolo.py",
+      "files": 1
+    },
+    {
+      "path": "11_export_aa_yolo_onnx.py",
+      "files": 1
+    },
+    {
+      "path": "07_prepare_learning_stages.py",
+      "files": 1
+    },
+    {
+      "path": "08_train_rtdetr_transfer.py",
+      "files": 1
+    },
+    {
+      "path": "09_train_rtdetr_incremental.py",
+      "files": 1
+    },
+    {
+      "path": "18_train_rtdetr_competition_road_v1.py",
+      "files": 1
+    },
+    {
+      "path": "26_build_competition_road_v2.py",
+      "files": 1
+    },
+    {
+      "path": "28_select_rtdetr_v2_checkpoint.py",
+      "files": 1
+    },
+    {
+      "path": "31_build_competition_road_v3.py",
+      "files": 1
+    },
+    {
+      "path": "32_train_rtdetr_competition_road_v3_server_gpu6.py",
+      "files": 1
+    },
+    {
+      "path": "33_select_rtdetr_v3_checkpoint.py",
+      "files": 1
+    },
+    {
+      "path": "34_test_rtdetr_v3_server_gpu6.py",
+      "files": 1
+    },
+    {
+      "path": "35_build_competition_road_v4.py",
+      "files": 1
+    },
+    {
+      "path": "36_train_rtdetr_v4_p2_lite_server_gpu6.py",
+      "files": 1
+    },
+    {
+      "path": "37_select_rtdetr_v4_p2_lite_checkpoint.py",
+      "files": 1
+    },
+    {
+      "path": "38_test_rtdetr_v4_p2_lite_server_gpu6.py",
+      "files": 1
+    },
+    {
+      "path": "39_export_rtdetr_v4_p2_lite_onnx.py",
+      "files": 1
+    },
+    {
+      "path": "40_audit_low_contrast_910.py",
+      "files": 1
+    },
+    {
+      "path": "41_prepare_low_contrast_voc.py",
+      "files": 1
+    },
+    {
+      "path": "42_build_rtdetr_low_contrast_v1.py",
+      "files": 1
+    },
+    {
+      "path": "43_train_rtdetr_low_contrast_v1_server_gpu6.py",
+      "files": 1
+    },
+    {
+      "path": "44_select_rtdetr_low_contrast_v1.py",
+      "files": 1
+    },
+    {
+      "path": "45_test_rtdetr_low_contrast_v1_server_gpu6.py",
+      "files": 1
+    },
+    {
+      "path": "run_competition.py",
+      "files": 1
+    },
+    {
+      "path": "smoke_test.py",
+      "files": 1
+    },
+    {
+      "path": "LOW_CONTRAST_EXPERIMENT.md",
+      "files": 1
+    },
+    {
+      "path": "incremental_learning",
+      "files": 12
+    },
+    {
+      "path": "transfer_learning",
+      "files": 13
+    },
+    {
+      "path": "competition/aa_yolo_runtime.py",
+      "files": 1
+    },
+    {
+      "path": "competition/rtdetr_p2_runtime.py",
+      "files": 1
+    },
+    {
+      "path": "competition/rtdetr_p2_lite_runtime.py",
+      "files": 1
+    },
+    {
+      "path": "competition/rtdetr_v4_runtime.py",
+      "files": 1
+    },
+    {
+      "path": "tools/cleanup_incremental.ps1",
+      "files": 1
+    },
+    {
+      "path": "engines/aa_yolo",
+      "files": 35
+    },
+    {
+      "path": "weights/aa_yolo",
+      "files": 1
+    },
+    {
+      "path": "docs/build_rtdetr_technical_document.py",
+      "files": 1
+    },
+    {
+      "path": "datasets/prepared/competition_road_v3",
+      "files": 8973
+    },
+    {
+      "path": "datasets/prepared/competition_road_v4",
+      "files": 10573
+    },
+    {
+      "path": "datasets/prepared/rtdetr_low_contrast_v1",
+      "files": 801
+    },
+    {
+      "path": "datasets/prepared/transfer_vedai_to_hit",
+      "files": 1149
+    },
+    {
+      "path": "datasets/source/competition_road_v3",
+      "files": 5982
+    },
+    {
+      "path": "datasets/source/competition_road_v4_hard_negatives",
+      "files": 1605
+    },
+    {
+      "path": "datasets/source/rtdetr_low_contrast_v1",
+      "files": 533
+    },
+    {
+      "path": "datasets/source/transfer",
+      "files": 0
+    },
+    {
+      "path": "datasets/source/base",
+      "files": 0
+    },
+    {
+      "path": "00_check_environment.py",
+      "files": 1
+    },
+    {
+      "path": "01_prepare_voc_dataset.py",
+      "files": 1
+    },
+    {
+      "path": "02_train_rtdetr.py",
+      "files": 1
+    },
+    {
+      "path": "03_test_rtdetr.py",
+      "files": 1
+    },
+    {
+      "path": "06_evaluate_five_frames.py",
+      "files": 1
+    },
+    {
+      "path": "10_export_rtdetr_onnx.py",
+      "files": 1
+    },
+    {
+      "path": "15_tune_rtdetr_postprocess.py",
+      "files": 1
+    },
+    {
+      "path": "audit_dataset.py",
+      "files": 1
+    }
+  ],
+  "installed": [
+    "tools/check_environment.py",
+    "tools/prepare_voc_dataset.py",
+    "training/train_rtdetr.py",
+    "evaluation/test_rtdetr.py",
+    "evaluation/evaluate_five_frames.py",
+    "tools/export_rtdetr_onnx.py",
+    "competition/postprocess.py",
+    "tools/audit_dataset.py",
+    "meta_learning/05_compare_fewshot.py",
+    "meta_learning/06_evaluate_zero_shot.py",
+    "incremental_after_transfer/test.py",
+    "tests/test_project_layout.py",
+    "project_config.yaml",
+    "competition/prepare.py",
+    "tools/catalog_datasets.py",
+    "competition/workflow.py",
+    "train_basic.py",
+    "test_basic.py",
+    "train_transfer.py",
+    "test_transfer.py",
+    "train_incremental.py",
+    "test_incremental.py",
+    "README.md",
+    "datasets/README.md",
+    "tests/smoke_test.py"
+  ],
+  "retained_root_entrypoints": [
+    "test_basic.py",
+    "test_incremental.py",
+    "test_transfer.py",
+    "train_basic.py",
+    "train_incremental.py",
+    "train_transfer.py"
+  ],
+  "retained_gpt_duplicates_verified": 215
+}

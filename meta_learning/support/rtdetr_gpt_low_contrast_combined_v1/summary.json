@@ -1,0 +1,22 @@
+{
+  "seed": 20260924,
+  "source": "D:\\InfraredSmallTargetDetection\\datasets\\prepared\\rtdetr_gpt_low_contrast_combined_v1\\annotations\\instances_train.json",
+  "nested": true,
+  "splits": {
+    "5": {
+      "images": 5,
+      "targets": 14,
+      "annotation": "D:\\InfraredSmallTargetDetection\\meta_learning\\support\\rtdetr_gpt_low_contrast_combined_v1\\support_005.json"
+    },
+    "10": {
+      "images": 10,
+      "targets": 28,
+      "annotation": "D:\\InfraredSmallTargetDetection\\meta_learning\\support\\rtdetr_gpt_low_contrast_combined_v1\\support_010.json"
+    },
+    "20": {
+      "images": 20,
+      "targets": 56,
+      "annotation": "D:\\InfraredSmallTargetDetection\\meta_learning\\support\\rtdetr_gpt_low_contrast_combined_v1\\support_020.json"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.idea/
+datasets/prepared/
+outputs/
+*.onnx
+*.engine
+*.pth
+*.pt
+*.ckpt
+*.zip
+.vscode/

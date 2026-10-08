@@ -1,0 +1,191 @@
+{
+  "date": "2026-10-03",
+  "root": "D:\\InfraredSmallTargetDetection",
+  "recoverable_archive": "D:\\InfraredSmallTargetDetection_archive_20261002\\subfolder_cleanup_20261003_130138",
+  "deletion_targets_fully_backed_up": true,
+  "deleted": [
+    {
+      "path": "outputs/transfer_learning",
+      "files": 49,
+      "logical_bytes": 706434913
+    },
+    {
+      "path": "outputs/rtdetr/competition_road_v3",
+      "files": 12,
+      "logical_bytes": 500062
+    },
+    {
+      "path": "outputs/basic_item_inference_smoke",
+      "files": 2,
+      "logical_bytes": 1008
+    },
+    {
+      "path": "outputs/basic_item_inference_test",
+      "files": 2,
+      "logical_bytes": 65341
+    },
+    {
+      "path": "outputs/basic_item_self_contained_smoke",
+      "files": 2,
+      "logical_bytes": 977
+    },
+    {
+      "path": "outputs/basic_item_self_contained_test",
+      "files": 2,
+      "logical_bytes": 65434
+    },
+    {
+      "path": "outputs/document_qa",
+      "files": 25,
+      "logical_bytes": 5852464
+    },
+    {
+      "path": "meta_learning/support/transfer_vedai_to_hit",
+      "files": 5,
+      "logical_bytes": 132595
+    },
+    {
+      "path": "weights/rtdetr/competition_road_v3_best.pth",
+      "files": 1,
+      "logical_bytes": 80633031
+    },
+    {
+      "path": "weights/rtdetr/competition_road_v4_fast_best.pth",
+      "files": 1,
+      "logical_bytes": 80935079
+    },
+    {
+      "path": "weights/rtdetr/rtdetr_bits_pretrained.pth",
+      "files": 1,
+      "logical_bytes": 81001853
+    },
+    {
+      "path": "engines/rtdetr/configs/rtdetr/competition_r18_competition_road_v3.yml",
+      "files": 1,
+      "logical_bytes": 1933
+    },
+    {
+      "path": "engines/rtdetr/configs/rtdetr/competition_r18_transfer_vedai_to_hit.yml",
+      "files": 1,
+      "logical_bytes": 1934
+    },
+    {
+      "path": "engines/rtdetr/configs/dataset/competition_competition_road_v3.yml",
+      "files": 1,
+      "logical_bytes": 899
+    },
+    {
+      "path": "engines/rtdetr/configs/dataset/competition_transfer_vedai_to_hit.yml",
+      "files": 1,
+      "logical_bytes": 907
+    },
+    {
+      "path": "engines/rtdetr/src/zoo/rtdetr/hybrid_encoder_p2_lite.py",
+      "files": 1,
+      "logical_bytes": 2428
+    },
+    {
+      "path": "tools/build_transfer_report.py",
+      "files": 1,
+      "logical_bytes": 18748
+    },
+    {
+      "path": "datasets/prepared/base/labels",
+      "files": 1050,
+      "logical_bytes": 114200
+    },
+    {
+      "path": "datasets/prepared/rtdetr_gpt_low_contrast_combined_v1/labels",
+      "files": 405,
+      "logical_bytes": 50186
+    },
+    {
+      "path": "datasets/prepared/rtdetr_gpt_low_contrast_combined_v1/sequence_groups.csv",
+      "files": 1,
+      "logical_bytes": 2958
+    },
+    {
+      "path": "datasets/source/gpt_low_contrast_910",
+      "files": 435,
+      "logical_bytes": 608345403
+    },
+    {
+      "path": "outputs\\meta_learning\\adaptation\\rtdetr_gpt_low_contrast_combined_v1\\fomaml_005shot\\last.pth",
+      "files": 1,
+      "logical_bytes": 151826895
+    },
+    {
+      "path": "outputs\\meta_learning\\adaptation\\rtdetr_gpt_low_contrast_combined_v1\\fomaml_010shot\\last.pth",
+      "files": 1,
+      "logical_bytes": 151826895
+    },
+    {
+      "path": "outputs\\meta_learning\\adaptation\\rtdetr_gpt_low_contrast_combined_v1\\fomaml_020shot\\last.pth",
+      "files": 1,
+      "logical_bytes": 151826895
+    },
+    {
+      "path": "outputs\\meta_learning\\adaptation\\rtdetr_gpt_low_contrast_combined_v1\\standard_005shot\\last.pth",
+      "files": 1,
+      "logical_bytes": 151826895
+    },
+    {
+      "path": "outputs\\meta_learning\\adaptation\\rtdetr_gpt_low_contrast_combined_v1\\standard_010shot\\last.pth",
+      "files": 1,
+      "logical_bytes": 151826895
+    },
+    {
+      "path": "outputs\\meta_learning\\adaptation\\rtdetr_gpt_low_contrast_combined_v1\\standard_020shot\\last.pth",
+      "files": 1,
+      "logical_bytes": 151826895
+    }
+  ],
+  "empty_directories_removed": [
+    "meta_learning\\tasks",
+    "datasets\\source",
+    "outputs\\rtdetr"
+  ],
+  "files_removed": 2005.0,
+  "logical_bytes_removed": 2475123723.0,
+  "retained_datasets": {
+    "base": {
+      "train": {
+        "images": 891,
+        "targets": 2588
+      },
+      "val": {
+        "images": 80,
+        "targets": 189
+      },
+      "test": {
+        "images": 79,
+        "targets": 179
+      }
+    },
+    "rtdetr_gpt_low_contrast_combined_v1": {
+      "train": {
+        "images": 283,
+        "targets": 770
+      },
+      "val": {
+        "images": 60,
+        "targets": 158
+      },
+      "test": {
+        "images": 62,
+        "targets": 163
+      }
+    }
+  },
+  "protected_file_count": 2924,
+  "protected_hashes_verified": true,
+  "duplicate_gpt_images_and_boxes_verified": 215,
+  "note": "Logical bytes are not physical space freed; image hardlinks may remain in other locations.",
+  "verification": {
+    "layout_tests": 6,
+    "implementation_help": "passed",
+    "strict_checkpoint_loads": 8,
+    "real_coco_loader_and_cpu_forward_1280x1024": "passed",
+    "training_started": false
+  }
+}

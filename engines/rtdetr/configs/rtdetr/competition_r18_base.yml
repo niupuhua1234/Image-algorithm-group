@@ -1,0 +1,96 @@
+__include__:
+- ../dataset/competition_base.yml
+- ../runtime.yml
+- ./include/dataloader.yml
+- ./include/optimizer.yml
+- ./include/rtdetr_r50vd.yml
+output_dir: D:/InfraredSmallTargetDetection/outputs/rtdetr/base
+sync_bn: false
+find_unused_parameters: false
+use_amp: true
+use_ema: true
+epoches: 72
+checkpoint_step: 5
+log_step: 20
+clip_max_norm: 0.1
+PResNet:
+  depth: 18
+  freeze_at: -1
+  freeze_norm: true
+  pretrained: false
+HybridEncoder:
+  in_channels:
+  - 128
+  - 256
+  - 512
+  hidden_dim: 256
+  expansion: 0.5
+  eval_spatial_size:
+  - 1024
+  - 1280
+RTDETR:
+  multi_scale: null
+RTDETRTransformer:
+  num_queries: 100
+  num_decoder_layers: 3
+  num_denoising: 100
+  eval_idx: -1
+  eval_spatial_size:
+  - 1024
+  - 1280
+RTDETRPostProcessor:
+  num_top_queries: 100
+optimizer:
+  type: AdamW
+  params:
+  - params: backbone
+    lr: 1.0e-05
+  - params: ^(?=.*encoder(?=.*bias|.*norm.*weight)).*$
+    weight_decay: 0.0
+  - params: ^(?=.*decoder(?=.*bias|.*norm.*weight)).*$
+    weight_decay: 0.0
+  lr: 0.0001
+  betas:
+  - 0.9
+  - 0.999
+  weight_decay: 0.0001
+lr_scheduler:
+  type: MultiStepLR
+  milestones:
+  - 59
+  - 67
+  gamma: 0.1
+train_dataloader:
+  dataset:
+    return_masks: false
+    transforms:
+      ops:
+      - type: RandomHorizontalFlip
+        p: 0.5
+      - type: Resize
+        size:
+        - 1024
+        - 1280
+      - type: ToImageTensor
+      - type: ConvertDtype
+      - type: SanitizeBoundingBox
+        min_size: 1
+      - type: ConvertBox
+        out_fmt: cxcywh
+        normalize: true
+  batch_size: 1
+  num_workers: 0
+  collate_fn: default_collate_fn
+val_dataloader:
+  dataset:
+    transforms:
+      ops:
+      - type: Resize
+        size:
+        - 1024
+        - 1280
+      - type: ToImageTensor
+      - type: ConvertDtype
+  batch_size: 1
+  num_workers: 0
+  collate_fn: default_collate_fn

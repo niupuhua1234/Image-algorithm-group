@@ -1,0 +1,47 @@
+{
+  "profile": "rtdetr_low_contrast_v1",
+  "expected_size": [
+    1280,
+    1024
+  ],
+  "splits": {
+    "train": {
+      "images": 230,
+      "targets": 517,
+      "empty_images": 15,
+      "median_target_width": 27.0,
+      "median_target_height": 22.0,
+      "targets_up_to_64x96": 517,
+      "missing_images": [],
+      "wrong_size_images": [],
+      "corrupt_images": [],
+      "invalid_boxes": []
+    },
+    "val": {
+      "images": 18,
+      "targets": 84,
+      "empty_images": 0,
+      "median_target_width": 34.0,
+      "median_target_height": 44.0,
+      "targets_up_to_64x96": 78,
+      "missing_images": [],
+      "wrong_size_images": [],
+      "corrupt_images": [],
+      "invalid_boxes": []
+    },
+    "test": {
+      "images": 16,
+      "targets": 62,
+      "empty_images": 0,
+      "median_target_width": 22.0,
+      "median_target_height": 32.0,
+      "targets_up_to_64x96": 62,
+      "missing_images": [],
+      "wrong_size_images": [],
+      "corrupt_images": [],
+      "invalid_boxes": []
+    }
+  },
+  "cross_split_identical_images": [],
+  "note": "Structural checks cannot prove competition-domain similarity. Visually review target contrast, road scenes, and box alignment."
+}

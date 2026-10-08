@@ -1,0 +1,73 @@
+{
+  "rows": [
+    {
+      "profile": "base",
+      "role": "basic",
+      "split": "train",
+      "images": 891,
+      "targets": 2588,
+      "missing_images": 0,
+      "invalid_boxes": 0,
+      "xml": 891,
+      "path": "D:\\InfraredSmallTargetDetection\\datasets\\prepared\\base"
+    },
+    {
+      "profile": "base",
+      "role": "basic",
+      "split": "val",
+      "images": 80,
+      "targets": 189,
+      "missing_images": 0,
+      "invalid_boxes": 0,
+      "xml": 80,
+      "path": "D:\\InfraredSmallTargetDetection\\datasets\\prepared\\base"
+    },
+    {
+      "profile": "base",
+      "role": "basic",
+      "split": "test",
+      "images": 79,
+      "targets": 179,
+      "missing_images": 0,
+      "invalid_boxes": 0,
+      "xml": 79,
+      "path": "D:\\InfraredSmallTargetDetection\\datasets\\prepared\\base"
+    },
+    {
+      "profile": "rtdetr_gpt_low_contrast_combined_v1",
+      "role": "transfer",
+      "split": "train",
+      "images": 283,
+      "targets": 770,
+      "missing_images": 0,
+      "invalid_boxes": 0,
+      "xml": 283,
+      "path": "D:\\InfraredSmallTargetDetection\\datasets\\prepared\\rtdetr_gpt_low_contrast_combined_v1"
+    },
+    {
+      "profile": "rtdetr_gpt_low_contrast_combined_v1",
+      "role": "transfer",
+      "split": "val",
+      "images": 60,
+      "targets": 158,
+      "missing_images": 0,
+      "invalid_boxes": 0,
+      "xml": 60,
+      "path": "D:\\InfraredSmallTargetDetection\\datasets\\prepared\\rtdetr_gpt_low_contrast_combined_v1"
+    },
+    {
+      "profile": "rtdetr_gpt_low_contrast_combined_v1",
+      "role": "transfer",
+      "split": "test",
+      "images": 62,
+      "targets": 163,
+      "missing_images": 0,
+      "invalid_boxes": 0,
+      "xml": 62,
+      "path": "D:\\InfraredSmallTargetDetection\\datasets\\prepared\\rtdetr_gpt_low_contrast_combined_v1"
+    }
+  ],
+  "issues": [],
+  "hash_checked": true,
+  "incremental_status": "deleted at user request; not rebuilt"
+}

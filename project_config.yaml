@@ -1,0 +1,28 @@
+# Shared defaults. Command-line arguments may override these values.
+evaluation:
+  match_iou: 0.40
+  target_pd: 0.90
+  official_elimination_pd: 0.85
+  max_latency_ms: 45.0
+  frame_group_size: 5
+
+rtdetr:
+  gpu: 0
+  epochs: 72
+  batch_size: 1
+  workers: 0
+
+meta_learning:
+  source_profile: base
+  target_profile: rtdetr_gpt_low_contrast_combined_v1
+  gpu: 0
+  seed: 20260907
+  shots: [5, 10, 20]
+  meta_epochs: 20
+  episodes_per_epoch: 10
+  support_per_task: 2
+  query_per_task: 2
+  inner_lr: 0.0001
+  meta_lr: 0.00001
+  adaptation_epochs: 20
+  adaptation_lr: 0.00002

@@ -1,0 +1,7 @@
+﻿profile,role,split,images,targets,missing_images,invalid_boxes,xml,path
+base,basic,train,891,2588,0,0,891,D:\InfraredSmallTargetDetection\datasets\prepared\base
+base,basic,val,80,189,0,0,80,D:\InfraredSmallTargetDetection\datasets\prepared\base
+base,basic,test,79,179,0,0,79,D:\InfraredSmallTargetDetection\datasets\prepared\base
+rtdetr_gpt_low_contrast_combined_v1,transfer,train,283,770,0,0,283,D:\InfraredSmallTargetDetection\datasets\prepared\rtdetr_gpt_low_contrast_combined_v1
+rtdetr_gpt_low_contrast_combined_v1,transfer,val,60,158,0,0,60,D:\InfraredSmallTargetDetection\datasets\prepared\rtdetr_gpt_low_contrast_combined_v1
+rtdetr_gpt_low_contrast_combined_v1,transfer,test,62,163,0,0,62,D:\InfraredSmallTargetDetection\datasets\prepared\rtdetr_gpt_low_contrast_combined_v1

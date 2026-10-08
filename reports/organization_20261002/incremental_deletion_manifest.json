@@ -1,0 +1,117 @@
+[
+  {
+    "path": "outputs\\incremental_after_transfer",
+    "files": 38,
+    "logical_bytes": 464848873.0
+  },
+  {
+    "path": "outputs\\incremental_learning",
+    "files": 67,
+    "logical_bytes": 710057923.0
+  },
+  {
+    "path": "datasets\\prepared\\inc_after_transfer_stage1",
+    "files": 94,
+    "logical_bytes": 224379536.0
+  },
+  {
+    "path": "datasets\\prepared\\inc_after_transfer_stage2",
+    "files": 124,
+    "logical_bytes": 297462330.0
+  },
+  {
+    "path": "datasets\\prepared\\inc_domain_stage1",
+    "files": 648,
+    "logical_bytes": 1544372342.0
+  },
+  {
+    "path": "datasets\\prepared\\inc_hit_080",
+    "files": 479,
+    "logical_bytes": 803742893.0
+  },
+  {
+    "path": "datasets\\prepared\\inc_hit_160",
+    "files": 559,
+    "logical_bytes": 818969982.0
+  },
+  {
+    "path": "datasets\\incremental_domains",
+    "files": 5222,
+    "logical_bytes": 3108048615.0
+  },
+  {
+    "path": "datasets\\source\\incremental_stage1",
+    "files": 0,
+    "logical_bytes": null
+  },
+  {
+    "path": "datasets\\source\\incremental_stage2",
+    "files": 0,
+    "logical_bytes": null
+  },
+  {
+    "path": "incremental_after_transfer\\prepared_summary.json",
+    "files": 1,
+    "logical_bytes": 472.0
+  },
+  {
+    "path": "incremental_after_transfer\\RESULTS.md",
+    "files": 1,
+    "logical_bytes": 2455.0
+  },
+  {
+    "path": "incremental_learning\\RESULTS.md",
+    "files": 1,
+    "logical_bytes": 4395.0
+  },
+  {
+    "path": "engines\\rtdetr\\configs\\dataset\\competition_inc_after_transfer_stage1.yml",
+    "files": 1,
+    "logical_bytes": 923.0
+  },
+  {
+    "path": "engines\\rtdetr\\configs\\rtdetr\\competition_r18_inc_after_transfer_stage1.yml",
+    "files": 1,
+    "logical_bytes": 1942.0
+  },
+  {
+    "path": "engines\\rtdetr\\configs\\dataset\\competition_inc_after_transfer_stage2.yml",
+    "files": 1,
+    "logical_bytes": 923.0
+  },
+  {
+    "path": "engines\\rtdetr\\configs\\rtdetr\\competition_r18_inc_after_transfer_stage2.yml",
+    "files": 1,
+    "logical_bytes": 1942.0
+  },
+  {
+    "path": "engines\\rtdetr\\configs\\dataset\\competition_inc_domain_stage1.yml",
+    "files": 1,
+    "logical_bytes": 891.0
+  },
+  {
+    "path": "engines\\rtdetr\\configs\\rtdetr\\competition_r18_inc_domain_stage1.yml",
+    "files": 1,
+    "logical_bytes": 1926.0
+  },
+  {
+    "path": "engines\\rtdetr\\configs\\dataset\\competition_inc_hit_080.yml",
+    "files": 1,
+    "logical_bytes": 867.0
+  },
+  {
+    "path": "engines\\rtdetr\\configs\\rtdetr\\competition_r18_inc_hit_080.yml",
+    "files": 1,
+    "logical_bytes": 1914.0
+  },
+  {
+    "path": "engines\\rtdetr\\configs\\dataset\\competition_inc_hit_160.yml",
+    "files": 1,
+    "logical_bytes": 867.0
+  },
+  {
+    "path": "engines\\rtdetr\\configs\\rtdetr\\competition_r18_inc_hit_160.yml",
+    "files": 1,
+    "logical_bytes": 1914.0
+  }
+]
