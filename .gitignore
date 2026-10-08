@@ -1,0 +1,56 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.venv/
+venv/
+env/
+
+# ---- 模型权重与导出产物(体积大, 通过 README 的下载链接获取) ----
+*.pth
+*.pt
+*.ckpt
+*.onnx
+*.onnx.data
+*.engine
+*.plan
+*.trt
+
+# ---- 数据集(通过 README 的下载链接获取) ----
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.tif
+*.tiff
+!docs/**/*.png
+!docs/**/*.jpg
+
+# ---- 训练输出 ----
+output/
+outputs/
+runs/
+checkpoints/
+logs/
+*.log
+eval/
+summary/
+work_dirs/
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- 临时文件 ----
+*.tmp
+~$*
+_report_tmp.md

@@ -15,12 +15,14 @@ import time
 from collections import Counter
 from pathlib import Path
 
-BASE = Path(__file__).resolve().parent
+BASE = Path(__file__).resolve().parent          # evaluation/
+ROOT = BASE.parent                              # 仓库根目录
+DEIM = ROOT / 'engines' / 'deim'                # 引擎代码
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', line_buffering=True)
 
 # torchvision 0.26 兼容补丁必须在 import deim 之前
-sys.path.insert(0, str(BASE / 'deim'))
-os.chdir(str(BASE / 'deim'))
+sys.path.insert(0, str(DEIM))
+os.chdir(str(DEIM))
 try:
     import patch_tw
     if hasattr(patch_tw, 'apply'):
@@ -53,10 +55,10 @@ def iou_matrix(a, b):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--ckpt', default=str(BASE / 'weights' / 'best_stg1.pth'))
+    ap.add_argument('--ckpt', default=str(ROOT / 'weights' / 'best_stg1.pth'))
     ap.add_argument('--config', default='configs/deim_rtdetrv2/deim_car_union_v4.yml')
-    ap.add_argument('--json', default=str(BASE / 'test' / 'annotations.json'))
-    ap.add_argument('--imgroot', default=str(BASE / 'test' / 'images'))
+    ap.add_argument('--json', default=str(ROOT / 'test' / 'annotations.json'))
+    ap.add_argument('--imgroot', default=str(ROOT / 'test' / 'images'))
     ap.add_argument('--imgsz', type=int, default=1024)
     ap.add_argument('--conf', type=float, default=0.005)
     ap.add_argument('--scan', action='store_true')

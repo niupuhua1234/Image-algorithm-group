@@ -1,6 +1,6 @@
 # 红外可见光识别 · DEIM 车辆检测模型
 
-本分支存放 **DEIM(DETR with Improved Matching)车辆检测模型**的完整代码,面向无人机 / 航空影像可见光 RGB 图像。
+本分支存放 **DEIM(DETR with Improved Matching)车辆检测模型**的完整代码、配置与实验报告,面向无人机 / 航空影像可见光 RGB 图像。
 
 ---
 
@@ -11,7 +11,7 @@
 | 模型 | **DEIM R18**(PResNet-18-d + HybridEncoder + RTDETRTransformer v2) |
 | 参数量 | **20.09 M** |
 | 类别数 | **6**:car / truck / bus / van / pickup / tank |
-| 数据集 | CAR-UNION(多数据集合并,已去重与泄漏核验) |
+| 数据集 | CAR-UNION v4(多数据集合并,已去重与泄漏核验) |
 | **验收准确率** | **90.36%**(50939 / 56375) |
 | 验证集 mAP@.50:.95 | 0.4048 |
 | 验证集 mAP@.50 | 0.6693 |
@@ -37,26 +37,28 @@
 ## 二、目录结构
 
 ```
-deim/
-├── engine/                 模型与训练引擎(核心)
-│   ├── backbone/           PResNet 骨干
-│   ├── deim/               HybridEncoder / RTDETRDecoder / 损失 / 匹配
-│   ├── core/               配置加载
-│   ├── data/               数据集与数据增强
-│   ├── optim/              优化器 / EMA / LR 调度
-│   ├── solver/             训练与评估循环
-│   └── misc/               工具
-├── configs/                配置(含 include 链)
-│   ├── deim_rtdetrv2/      模型配置
-│   │   └── deim_car_union_v4.yml     ← 本模型训练/推理配置
-│   └── base/               基座配置
-├── tools/                  工具脚本
-├── train.py                训练入口
-├── patch_tw.py             torchvision 0.26 兼容补丁(必需)
-├── eval_deploy.py          验收脚本(路径自适应)
-├── export_trt.py           TensorRT 导出脚本
-└── DEIM技术文档.md          完整技术文档(架构/超参/实测/部署)
+.
+├── README.md                      本文件
+├── requirements.txt               依赖清单
+├── .gitignore
+├── docs/                          技术文档
+│   └── DEIM_MODEL_TECHNICAL_DOCUMENT.md    架构 / 超参 / 实测 / 部署(完整)
+├── engines/                       模型引擎
+│   └── deim/                      DEIM 框架(完整可训练/可推理)
+│       ├── engine/                模型定义(backbone / encoder / decoder / 损失 / 匹配)
+│       ├── configs/               配置(含 include 链)
+│       │   └── deim_rtdetrv2/deim_car_union_v4.yml    ← 本模型配置
+│       ├── tools/                 工具脚本
+│       ├── train.py               训练入口
+│       └── patch_tw.py            torchvision 0.26 兼容补丁(必需)
+├── evaluation/                    评估与导出
+│   ├── eval_deploy.py             验收脚本(路径自适应)
+│   └── export_trt.py              TensorRT 导出脚本
+└── reports/                       实验报告
+    └── EXPERIMENT_RESULTS.md      训练 / 验收 / 瓶颈分析 / 改进方向
 ```
+
+> **注意**:训练与推理**不需要**改动任何绝对路径 —— `evaluation/*.py` 基于自身位置自动定位 `engines/deim/` 与数据目录。
 
 ---
 
@@ -66,21 +68,30 @@ deim/
 
 | 资源 | 体积 | 内容 | 下载地址 |
 |---|---|---|---|
-| **模型权重** | 322 MB | `best_stg1.pth`(EMA 权重) | `TODO: 待补充网盘链接` |
-| **训练数据集** | 3.83 GB | CAR-UNION(train 20,000 / val 3,674 / test 491) | `TODO: 待补充网盘链接` |
-| **测试集切片** | 615 MB | 3,976 块 1280×1280 + 56,375 GT 标注 | `TODO: 待补充网盘链接` |
+| **模型权重** | 307 MB | `best_stg1.pth`(EMA 权重,epoch 31) | `TODO: 待补充网盘链接` |
+| **数据集 CAR-UNION v4** | **7.35 GB** | train 50,024 块 / val 8,727 块 / test 3,976 块 + COCO 标注 | `TODO: 待补充网盘链接` |
+| **测试集切片(快速验证用)** | 615 MB | test 3,976 块 + `annotations.json` | `TODO: 待补充网盘链接` |
 
-**数据格式**:YOLO 格式(`data.yaml` + `images/` + `labels/`),图片统一 1920×1080。
+**说明**:
+- **只做推理 / 验收** → 下载「模型权重 + 测试集切片」(共 **922 MB**)即可;
+- **要做训练** → 下载完整「数据集 CAR-UNION v4」;
+- 测试集切片是数据集中 test 部分的子集,单独提供是为了免去下载 7.35 GB。
 
-**获取后如何放置**:
+**数据格式**:
+- 图片:切片后的 1280×1280 块(原图 1920×1080,x 方向 stride 640,每图 2 块)
+- 标注:训练用 COCO JSON,评估用 `annotations.json`
+
+**放置位置**(下载后按此结构摆放,脚本即可直接运行):
 
 ```
-<你的工作目录>/
-├── deim/                    ← 本仓库的代码
-├── weights/best_stg1.pth    ← 从网盘下载
+<仓库根目录>/
+├── engines/deim/          ← 仓库自带
+├── evaluation/            ← 仓库自带
+├── weights/
+│   └── best_stg1.pth      ← 从网盘下载
 └── test/
-    ├── images/              ← 从网盘下载(3976 张)
-    └── annotations.json     ← 从网盘下载
+    ├── images/            ← 从网盘下载(3976 张)
+    └── annotations.json   ← 从网盘下载
 ```
 
 ---
@@ -91,8 +102,8 @@ deim/
 # 实测可用组合
 torch==2.11.0+cu128
 torchvision==0.26.0+cu128
-numpy
-Pillow
+numpy / Pillow / PyYAML / tqdm
+faster-coco-eval
 # 可选(TensorRT 加速)
 tensorrt==11.2.1.2
 ```
@@ -101,10 +112,10 @@ tensorrt==11.2.1.2
 
 ```bash
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
-pip install numpy Pillow
+pip install -r requirements.txt
 ```
 
-> **重要**:`patch_tw.py` 是**必需的** —— 它修补 torchvision 0.26 的 `Transform.forward` 接口变更(DEIM 使用旧式 `_transform` 接口)。若报 `NotImplementedError: _transform`,就是这个补丁没生效。
+> **重要**:`engines/deim/patch_tw.py` 是**必需的** —— 它修补 torchvision 0.26 的 `Transform.forward` 接口变更(DEIM 使用旧式 `_transform` 接口)。若报 `NotImplementedError: _transform`,就是这个补丁没生效。`eval_deploy.py` 会自动加载它。
 
 ---
 
@@ -113,16 +124,16 @@ pip install numpy Pillow
 ### 5.1 验收测试
 
 ```bash
-cd deim
-python eval_deploy.py                 # 默认 conf 0.005(验收口径)
-python eval_deploy.py --scan          # 扫描多个置信度阈值
-python eval_deploy.py --imgsz 1280    # 改推理分辨率
+# 在仓库根目录执行
+python evaluation/eval_deploy.py                 # 默认 conf 0.005(验收口径)
+python evaluation/eval_deploy.py --scan          # 扫描多个置信度阈值
+python evaluation/eval_deploy.py --imgsz 1280    # 改推理分辨率
 
-# 指定权重与数据位置
-python eval_deploy.py \
-    --ckpt ../weights/best_stg1.pth \
-    --json ../test/annotations.json \
-    --imgroot ../test/images
+# 手动指定路径
+python evaluation/eval_deploy.py \
+    --ckpt weights/best_stg1.pth \
+    --json test/annotations.json \
+    --imgroot test/images
 ```
 
 **预期输出**:
@@ -140,7 +151,7 @@ conf=0.005: acc=0.9036 (50939/56375)  avg_ms=15.2  mean_score=0.080
 > ⚠️ **engine 与 GPU 架构绑定,不能跨机器拷贝** —— 必须在目标机器上重新导出。
 
 ```bash
-python export_trt.py --imgsz 1024
+python evaluation/export_trt.py --imgsz 1024
 ```
 
 导出时**必须完全定形**(固定 batch 与 H/W、无 `dynamic_axes`),否则会报
@@ -149,6 +160,7 @@ python export_trt.py --imgsz 1024
 ### 5.3 训练
 
 ```bash
+cd engines/deim
 python train.py -c configs/deim_rtdetrv2/deim_car_union_v4.yml \
     -d cuda:0 --use-amp -u epoches=45
 ```
@@ -176,7 +188,9 @@ python train.py -c configs/deim_rtdetrv2/deim_car_union_v4.yml \
 | 误检量大 | 本口径不惩罚误检,test 上 Precision 仅 4.68% | 提高 conf 到 0.20~0.30(Precision 53%~68%) |
 | Mosaic output_size 偏小 | `320` 会压缩小目标细节 | 训练时改 640 并降低概率 |
 
-**详细分析见 `deim/DEIM技术文档.md`**。
+**详细分析与改进路线见**:
+- `reports/EXPERIMENT_RESULTS.md`(实验数据、瓶颈量化、改进方案)
+- `docs/DEIM_MODEL_TECHNICAL_DOCUMENT.md`(架构、输入输出、后处理、部署)
 
 ---
 

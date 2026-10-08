@@ -9,9 +9,11 @@ import sys
 import time
 from pathlib import Path
 
-BASE = Path(__file__).resolve().parent
-sys.path.insert(0, str(BASE / 'deim'))
-os.chdir(str(BASE / 'deim'))
+BASE = Path(__file__).resolve().parent          # evaluation/
+ROOT = BASE.parent                              # 仓库根目录
+DEIM = ROOT / 'engines' / 'deim'
+sys.path.insert(0, str(DEIM))
+os.chdir(str(DEIM))
 
 import torch
 from engine.core import YAMLConfig
@@ -28,7 +30,7 @@ cfg = YAMLConfig('configs/deim_rtdetrv2/deim_car_union_v4.yml')
 model = cfg.model
 model.encoder.eval_spatial_size = None
 model.decoder.eval_spatial_size = None
-ck = torch.load(str(BASE / 'weights' / 'best_stg1.pth'), map_location='cpu')
+ck = torch.load(str(ROOT / 'weights' / 'best_stg1.pth'), map_location='cpu')
 sd = ck['ema']['module'] if isinstance(ck.get('ema'), dict) and 'module' in ck['ema'] else ck.get('model', ck)
 msd = model.state_dict()
 model.load_state_dict({k: v for k, v in sd.items() if k in msd and msd[k].shape == v.shape}, strict=False)

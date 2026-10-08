@@ -1,0 +1,29 @@
+# DEIM 车辆检测 —— 运行依赖
+# 实测可用组合(RTX 5080 / CUDA 12.8)
+
+# 核心(必需)
+torch>=2.6.0
+torchvision>=0.21.0
+numpy>=1.24
+Pillow>=10.0
+PyYAML>=6.0
+tqdm
+
+# 评估指标(DEIM 的 coco_eval 依赖 faster-coco-eval)
+faster-coco-eval>=1.6.0
+
+# 可选:TensorRT 加速(需与本机 CUDA 版本匹配)
+# tensorrt>=10.0
+# onnx>=1.15
+# onnxsim
+# pycuda
+
+# 实测环境(仅供参考)
+#   torch        2.11.0+cu128
+#   torchvision  0.26.0+cu128
+#   TensorRT     11.2.1.2
+#   Python       3.10
+#
+# 安装示例:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
+#   pip install -r requirements.txt
