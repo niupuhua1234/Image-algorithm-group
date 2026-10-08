@@ -1,0 +1,8 @@
+{
+  "source": "https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8s.pt",
+  "bytes": 22573363,
+  "md5": "31fd9a2593ff42e8bfd7478c2314ed40",
+  "sha256": "268e5bb54c640c96c3510224833bc2eeacab4135c6deb41502156e39986b562d",
+  "checkpoint_date": "2022-12-30T08:15:10.989874",
+  "checkpoint_version": "8.0.0.dev0"
+}

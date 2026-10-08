@@ -1,0 +1,12 @@
+# Python 3.8 baseline matching the original competition training environment.
+# Create a separate environment; install the appropriate PyTorch CUDA build first.
+torch==2.0.1
+torchvision==0.15.2
+ultralytics==8.0.196
+opencv-python>=4.8,<4.11
+numpy>=1.23,<1.25
+scipy>=1.10,<1.11
+PyYAML>=6.0,<7
+Pillow>=9.5,<11
+tqdm>=4.65,<5
+certifi>=2024.2.2
