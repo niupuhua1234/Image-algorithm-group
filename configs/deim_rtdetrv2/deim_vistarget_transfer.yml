@@ -1,0 +1,111 @@
+__include__: [
+  './deim_r18vd_120e_coco.yml',
+]
+
+# ============================================================================
+# vistarget transfer —— 迁移学习阶段
+#   起点: base 阶段的最优权重 (用 -t <path> 传入)
+#   数据: transfer/train 仅 100 图 / 293 框  <- few-shot, 参数按此调整
+#          transfer/val 200 图 / 612 框(用于选权重)
+#          transfer/test 687 图 / 2,084 框(最终评价)
+#   目标: 中位 25~26 px, <32px 占 80~87%(比 base 更小)
+#
+# few-shot 的三条关键设计:
+#   ① lr 降到 1e-5(基础阶段的 1/20) —— 100 张图, 大 lr 会立刻冲垮预训练特征
+#   ② 冻结 backbone 前段(stage0~1) + 冻结 BN —— 保住通用特征
+#   ③ 关闭 MixUp, Mosaic 概率减半 —— 样本太少, 过强增强等于把 100 张变成噪声
+# ============================================================================
+num_classes: 4
+remap_mscoco_category: False
+eval_spatial_size: ~
+
+# ---- 冻结策略: 显式覆盖继承链里的 freeze_at=-1 ----
+PResNet:
+  freeze_at: 1          # 冻结 stem + stage0 + stage1; stage2/3 及 encoder/decoder 可训
+  freeze_norm: True     # BN 冻结, 防止 few-shot 下统计量被 100 张图带偏
+
+train_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: D:/BaiduNetdiskDownload/datasets/vistarget_work/transfer/images/train
+    ann_file: D:/BaiduNetdiskDownload/datasets/vistarget_work/transfer/annotations/train.json
+    return_masks: False
+    transforms:
+      # 200 epoch 的增强调度: [Mosaic 起, Mosaic 止, 全关]
+      policy:
+        epoch: [4, 80, 190]
+      ops:
+        - {type: Mosaic, output_size: 640, rotation_range: 10, translation_range: [0.1, 0.1],
+           scaling_range: [0.5, 1.5], probability: 0.5, fill_value: 0,
+           use_cache: False, max_cached_images: 50, random_pop: True}
+        - {type: RandomPhotometricDistort, p: 0.4}
+        - {type: RandomZoomOut, fill: 0}
+        - {type: RandomIoUCrop, p: 0.5}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [1280, 1280], }
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: 'float32', scale: True}
+        - {type: ConvertBoxes, fmt: 'cxcywh', normalize: True}
+  shuffle: True
+  num_workers: 4
+  drop_last: True
+  total_batch_size: 4          # 100 图 / batch 4 = 25 iter/epoch
+  collate_fn:
+    type: BatchImageCollateFunction
+    base_size: 1280
+    base_size_repeat: 1
+    mixup_prob: 0.0            # few-shot: 关闭 MixUp
+    mixup_epochs: [0, 0]
+    stop_epoch: 200
+
+val_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: D:/BaiduNetdiskDownload/datasets/vistarget_work/transfer/images/val
+    ann_file: D:/BaiduNetdiskDownload/datasets/vistarget_work/transfer/annotations/val.json
+    return_masks: False
+  shuffle: False
+  num_workers: 4
+  drop_last: False
+  total_batch_size: 8
+  collate_fn:
+    type: BatchImageCollateFunction
+    base_size: 1280
+
+# ---- 优化器: lr 比基础阶段低 20 倍 ----
+optimizer:
+  type: AdamW
+  params:
+    - params: '^(?=.*(?:norm|bn)).*$'
+      weight_decay: 0.
+  lr: 0.00001               # 1e-5
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+# ---- 调度 ----
+lrsheduler: flatcosine
+lr_gamma: 0.5
+warmup_iter: 200            # 迭代总数只有 5,000, warmup 不宜长
+flat_epoch: 100
+no_aug_epoch: 10
+
+# ---- 轮数: 每 epoch 仅 25 iter, 需要多轮累计 ----
+epoches: 200
+
+output_dir: ./output/deim_vistarget_transfer
+
+# ============================================================================
+# 用法(等 base 训练完成后再执行):
+#   python train.py -c configs/deim_rtdetrv2/deim_vistarget_transfer.yml \
+#       -d cuda:0 --use-amp \
+#       -t output/deim_vistarget_base/best_stg1.pth
+#
+# 注意事项:
+#   1) -t 加载的是整份 checkpoint, 其中 ema.module 才是基础阶段实际评估的权重
+#   2) val 只有 200 图 / 612 框, 指标波动会比较大, 建议同时看 test 的趋势
+#   3) 若 val mAP 在前 20 epoch 就饱和甚至下降, 说明 100 张图已到上限,
+#      应减少 epoch 或降低 lr(而不是加增强)
+# ============================================================================

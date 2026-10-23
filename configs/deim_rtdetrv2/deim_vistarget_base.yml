@@ -1,0 +1,74 @@
+__include__: [
+  './deim_r18vd_120e_coco.yml',
+]
+
+# ============================================================================
+# vistarget base —— 基础训练
+#   数据: D:\BaiduNetdiskDownload\datasets\vistarget_work\base  (PNG->JPEG + COCO)
+#   类别: 4 (car1~car4)
+#   目标: 中位 29px @1920x1080; 输入 1280 -> 19.3px
+# ============================================================================
+num_classes: 4
+remap_mscoco_category: False
+eval_spatial_size: ~
+
+train_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: D:/BaiduNetdiskDownload/datasets/vistarget_work/base/images/train
+    ann_file: D:/BaiduNetdiskDownload/datasets/vistarget_work/base/annotations/train.json
+    return_masks: False
+    transforms:
+      # 四阶段增强策略: [Mosaic 起, Mosaic 止, 全关]
+      policy:
+        epoch: [4, 30, 58]
+      ops:
+        # ⚠️ output_size 640 (不是 320): 目标中位仅 29px, 320 会压到约 1/8 面积
+        - {type: Mosaic, output_size: 640, rotation_range: 10, translation_range: [0.1, 0.1],
+           scaling_range: [0.5, 1.5], probability: 0.7, fill_value: 0,
+           use_cache: False, max_cached_images: 50, random_pop: True}
+        - {type: RandomPhotometricDistort, p: 0.5}
+        - {type: RandomZoomOut, fill: 0}
+        # 目标小, IoUCrop 从 0.8 降到 0.6
+        - {type: RandomIoUCrop, p: 0.6}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [1280, 1280], }
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: 'float32', scale: True}
+        - {type: ConvertBoxes, fmt: 'cxcywh', normalize: True}
+  shuffle: True
+  num_workers: 8
+  drop_last: True
+  total_batch_size: 4
+  collate_fn:
+    type: BatchImageCollateFunction
+    base_size: 1280
+    base_size_repeat: 1
+    mixup_prob: 0.5
+    # 修正: 原继承值是 [4, 64] 而 epoches 只有 60, 这里对齐 Mosaic 关闭点
+    mixup_epochs: [4, 30]
+    stop_epoch: 60
+
+val_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: D:/BaiduNetdiskDownload/datasets/vistarget_work/base/images/val
+    ann_file: D:/BaiduNetdiskDownload/datasets/vistarget_work/base/annotations/val.json
+    return_masks: False
+  shuffle: False
+  num_workers: 8
+  drop_last: False
+  total_batch_size: 8
+  collate_fn:
+    type: BatchImageCollateFunction
+    base_size: 1280
+
+output_dir: ./output/deim_vistarget_base
+
+# 60 epoch 调度: 数据 3,998 张, batch 4 -> 1,000 iter/epoch
+epoches: 60
+flat_epoch: 30
+no_aug_epoch: 3

@@ -1,0 +1,75 @@
+__include__: [
+  './deim_vistarget_base.yml',
+]
+
+# ============================================================================
+# base 续训阶段(第 2 段): 从 60 轮的最优权重接着训到总计约 90 轮
+#
+# 为什么不直接 -r last.pth 改 epoches=90:
+#     flatcosine 按 "当前 iter / 总 iter" 算进度。总轮数 60->90 后,
+#     epoch 56 的进度从 93% 退回 62%, lr 会从 0.000102 跳回 0.000173(+70%),
+#     相当于收敛末期突然放大学习率, 可能破坏已学好的权重。
+#
+# 本配置的做法:
+#     把续训当成独立的第二阶段 —— 总轮数设 33, lr 起点直接取当前值 0.0001,
+#     flat_epoch=0 使余弦衰减从第一轮就开始, 到第 33 轮平滑降到接近 0。
+#     最终训练量 = 60(已完成) + 33 = 93 轮。
+#
+# 增强策略:
+#     原配方在 flat_epoch=30(即 ep30)后 lr 衰减、ep43 关 Mosaic、
+#     ep58 关全部增强。续训阶段应延续"后期弱增强"的状态, 因此这里
+#     直接关闭 Mosaic / MixUp, 只保留 HFlip 与 PhotometricDistort。
+# ============================================================================
+epoches: 33
+flat_epoch: 0
+no_aug_epoch: 3
+
+# lr 从当前实测值接续(2e-4 的一半), 全程余弦降到 0
+optimizer:
+  type: AdamW
+  params:
+    - params: '^(?=.*(?:norm|bn)).*$'
+      weight_decay: 0.
+  lr: 0.0001
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+lrsheduler: flatcosine
+lr_gamma: 0.5
+warmup_iter: 0
+
+train_dataloader:
+  dataset:
+    transforms:
+      # 999 让策略永不触发, 等于全程无 Mosaic
+      policy:
+        epoch: [999, 999, 999]
+      ops:
+        - {type: RandomPhotometricDistort, p: 0.3}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [1280, 1280], }
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: 'float32', scale: True}
+        - {type: ConvertBoxes, fmt: 'cxcywh', normalize: True}
+  total_batch_size: 4
+  num_workers: 8
+  collate_fn:
+    type: BatchImageCollateFunction
+    base_size: 1280
+    base_size_repeat: 1
+    mixup_prob: 0.0
+    mixup_epochs: [0, 0]
+    stop_epoch: 33
+
+output_dir: ./output/deim_vistarget_base_ext
+
+# ============================================================================
+# 启动命令(等 60 轮跑完后执行):
+#   python train.py -c configs/deim_rtdetrv2/deim_vistarget_base_ext.yml \
+#       -d cuda:0 --use-amp -t output/deim_vistarget_base/best_stg1.pth
+#
+# 注: -t 只加载权重, 不继承优化器动量与 EMA 状态。
+#     在 lr 仅 1e-4 的情况下, 动量的影响有限, 换来的是 lr 曲线连续。
+#     若你更看重动量继承, 可改用 -r last.pth 并接受 lr 跳变。
+# ============================================================================

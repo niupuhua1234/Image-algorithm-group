@@ -1,0 +1,106 @@
+__include__: [
+  './deim_r18vd_120e_coco.yml',
+]
+
+# ============================================================================
+# 类增量 第二阶段 (inc_p2): 6 类 -> 8 类, 新增 military_motorcycle / bridge_layer
+#
+# 起点: 从 inc_p1 的最优权重扩展出的 8 类 checkpoint
+#
+# 训练数据: inc_p2/annotations/train_replay.json
+#   新类  577 图 (military_motorcycle 1,141 框 + bridge_layer 1,143 框)
+#   回放  385 图 from base + 192 图 from inc_p1 (= 577 图)
+#   -> 覆盖全部 6 个老类
+#
+# 相比 inc_p1 的变化(每加一批, 对老类的扰动预算更小):
+#   lr      2e-5 -> 1e-5
+#   epoch   12   -> 10
+# ============================================================================
+num_classes: 8
+remap_mscoco_category: False
+eval_spatial_size: ~
+
+PResNet:
+  freeze_at: 1
+  freeze_norm: True
+
+train_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: D:/BaiduNetdiskDownload/datasets/vistarget_work
+    ann_file: D:/BaiduNetdiskDownload/datasets/vistarget_work/inc_p2/annotations/train_replay.json
+    return_masks: False
+    transforms:
+      policy:
+        epoch: [999, 999, 999]
+      ops:
+        - {type: RandomPhotometricDistort, p: 0.3}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [1280, 1280], }
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: 'float32', scale: True}
+        - {type: ConvertBoxes, fmt: 'cxcywh', normalize: True}
+  shuffle: True
+  num_workers: 6
+  drop_last: True
+  total_batch_size: 4
+  collate_fn:
+    type: BatchImageCollateFunction
+    base_size: 1280
+    base_size_repeat: 1
+    mixup_prob: 0.0
+    mixup_epochs: [0, 0]
+    stop_epoch: 20
+
+val_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: D:/BaiduNetdiskDownload/datasets/vistarget_work
+    ann_file: D:/BaiduNetdiskDownload/datasets/vistarget_work/inc_p2/annotations/rel_val.json
+    return_masks: False
+  shuffle: False
+  num_workers: 6
+  drop_last: False
+  total_batch_size: 8
+  collate_fn:
+    type: BatchImageCollateFunction
+    base_size: 1280
+
+optimizer:
+  type: AdamW
+  params:
+    - params: '^(?=.*(?:norm|bn)).*$'
+      weight_decay: 0.
+  lr: 0.00003               # 1e-5
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+lrsheduler: flatcosine
+lr_gamma: 0.5
+warmup_iter: 300
+flat_epoch: 10
+no_aug_epoch: 3
+epoches: 20
+
+output_dir: ./output/deim_vistarget_inc_p2
+
+# ============================================================================
+# 训练命令:
+#   python expand_head.py \
+#       --config configs/deim_rtdetrv2/deim_vistarget_inc_p1.yml \
+#       --ckpt  output/deim_vistarget_inc_p1/best_stg1.pth \
+#       --new-num-classes 8 \
+#       --out-ckpt output/inc_p2_init.pth \
+#       --out-config configs/deim_rtdetrv2/deim_vistarget_inc_p2_init.yml
+#
+#   python train.py -c configs/deim_rtdetrv2/deim_vistarget_inc_p2.yml \
+#       -d cuda:0 --use-amp -t output/inc_p2_init.pth
+#
+# 验收:
+#   1) inc_p2/test 8 类整体
+#   2) inc_p1/test 6 类回归  -> 3A 的类不能掉
+#   3) base/test  4 类回归  -> 最初的老类不能掉
+# ============================================================================
