@@ -1,0 +1,90 @@
+# ============================================================================
+# 模型配置: RT-DETRv2 + PResNet-18-d  (可见光目标识别主干)
+# ----------------------------------------------------------------------------
+# 技术路线书 4.1 节: v2 作为当前建设主干, 沿用"骨干 + 混合编码器 + 解码器"接口划分。
+#
+# 数值与本地 deim 仓库的最终生效配置完全一致
+# (来源: deim/configs/deim_rtdetrv2/deim_car_union_v4.yml 经 YAMLConfig 解析后的结果)
+# ============================================================================
+model:
+  arch: rtdetrv2                        # 组件注册名; 对应 src/models/adapters/visible_recognition.py
+
+  # ---- 骨干(网络结构层面的 backbone, 与"代码建设主干"是两回事)----
+  backbone:
+    _class: PResNet
+    depth: 18
+    variant: d
+    return_idx: [1, 2, 3]
+    num_stages: 4
+    freeze_at: -1                       # DEIM: 解冻(基线默认 0)
+    freeze_norm: False                  # DEIM: BN 参与训练(基线默认 True)
+    pretrained: False                   # 权重由训练脚本单独加载
+
+  # ---- 混合编码器: AIFI 尺度内交互 + CCFM 跨尺度融合 ----
+  encoder:
+    _class: HybridEncoder
+    in_channels: [128, 256, 512]
+    feat_strides: [8, 16, 32]
+    hidden_dim: 256
+    use_encoder_idx: [2]                # 只对 stride-32 做自注意力
+    num_encoder_layers: 1
+    nhead: 8
+    dim_feedforward: 1024
+    dropout: 0.0
+    enc_act: gelu
+    expansion: 0.5                      # R18 档
+    depth_mult: 1
+    act: silu
+    version: rt_detrv2
+
+  # ---- 解码器: 查询式 Transformer + 可变形注意力 ----
+  decoder:
+    _class: RTDETRTransformerv2
+    feat_channels: [256, 256, 256]
+    feat_strides: [8, 16, 32]
+    hidden_dim: 256
+    num_levels: 3
+    num_layers: 3                       # R18 档用 3 层(R50 为 6)
+    num_queries: 300
+    num_denoising: 100
+    label_noise_ratio: 0.5
+    box_noise_scale: 1.0
+    eval_idx: -1
+    num_points: [4, 4, 4]               # v2: 各尺度可独立配置
+    cross_attn_method: default          # default(grid_sample) | discrete(部署友好, 需重训)
+    query_select_method: default
+    query_pos_method: as_reg            # DEIM
+    activation: silu
+    mlp_act: silu
+
+  # null = 动态位置编码; 推理时建议预生成到 GPU(见 src/deployment/runtime.py)
+  eval_spatial_size: null
+
+# ---- 损失与匹配(必须与 DETR 族配套, 不可与 YOLO 检测头混用)----
+loss:
+  _class: DEIMCriterion
+  weight_dict:
+    loss_mal: 1                         # DEIM 的 Matchability-Aware Loss
+    loss_bbox: 5
+    loss_giou: 2
+  losses: [mal, boxes]                  # 实际启用的项以此为准
+  gamma: 1.5
+  matcher:
+    type: HungarianMatcher
+    weight_dict: {cost_class: 2, cost_bbox: 5, cost_giou: 2}
+    alpha: 0.25
+    gamma: 2.0
+
+# ---- 纯 v2 基线对照(技术路线书 4.1: "对本地 DEIM 增强版与纯 v2 基线分别管理")----
+baseline_v2:
+  # 把下面的开关全部置 false, 即得到官方 v2 的默认训练方案
+  description: 官方 RT-DETRv2 基线; 用于与 DEIM 增强版做单因素消融
+  overrides:
+    loss:
+      weight_dict: {loss_vfl: 1, loss_bbox: 5, loss_giou: 2}
+      losses: [vfl, boxes]
+      alpha: 0.75
+      gamma: 2.0
+    model:
+      backbone: {freeze_at: 0, freeze_norm: True}
+      decoder: {query_pos_method: default}

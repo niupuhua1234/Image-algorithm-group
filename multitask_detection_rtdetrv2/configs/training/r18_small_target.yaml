@@ -1,0 +1,14 @@
+train:
+  trainer: supervised_detection
+  epoches: 72
+  batch_size: 1
+  num_workers: 0
+  precision: fp32
+  seed: 20261009
+  flip_probability: 0.5
+  clip_max_norm: 0.1
+  initialize: experiments/infrared_small_target/pretrained/v2_s_coco.pth
+  ema: {decay: 0.9999, warmups: 2000}
+optimizer: {type: AdamW, lr: 0.0001, backbone_lr: 0.00001, weight_decay: 0.0001}
+scheduler: {milestones: [59, 67], gamma: 0.1}
+experiment: {root: experiments, stage: basic}

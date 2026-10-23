@@ -1,0 +1,9 @@
+{
+  "task_id": "infrared_small_target",
+  "trt": "10.8.0.43",
+  "gpu": "NVIDIA GeForce GTX 1650 Ti",
+  "weight_sha256": "3bb56e7132b582ddf28953501d3546781d14da2884b62f9729cb708a937f5b27",
+  "engine_sha256": "0849eac3a7034e6a81baa58da9248a68aeb3ba580e234f9b7526f247f3b7ed69",
+  "onnx_sha256": "5fd8d4cf2ba615e596f4f26444e60e3bcd3cdeb69ae90036434037621cbd848c",
+  "precision": "fp16"
+}

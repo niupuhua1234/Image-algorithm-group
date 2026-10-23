@@ -1,0 +1,4 @@
+defaults: [../../../configs/tasks/infrared_small_target.yaml]
+deployment:
+  engine: experiments/infrared_small_target/integration_export_cuda/model_fp16.engine
+  engine_metadata: experiments/infrared_small_target/integration_export_cuda/model_fp16.build.json

@@ -1,0 +1,10 @@
+{
+  "seconds": 18.53168511390686,
+  "precision": "fp16",
+  "trt": "10.8.0.43",
+  "gpu": "NVIDIA GeForce GTX 1650 Ti",
+  "engine_sha256": "e090ba572600e2e0bb261ed13f3013562ccc08ebe7d906e6c678f046e62cc7a9",
+  "onnx_sha256": "5fd8d4cf2ba615e596f4f26444e60e3bcd3cdeb69ae90036434037621cbd848c",
+  "weight_sha256": "3bb56e7132b582ddf28953501d3546781d14da2884b62f9729cb708a937f5b27",
+  "protected_fp32_layers": []
+}

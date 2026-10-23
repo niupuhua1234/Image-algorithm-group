@@ -1,0 +1,486 @@
+{
+  "checked": 120,
+  "unchanged": 120,
+  "files": [
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\README.md",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\requirements.txt",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\docs\\ARCHITECTURE.md",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\docs\\HANDOVER.md",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\patch_tw.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\VERSION.md",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\tools\\eval.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\tools\\infer.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\tools\\list_tasks.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\tools\\train.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\configs\\models\\rtdetrv2_r18_visible.yaml",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\configs\\tasks\\infrared_recognition.yaml",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\configs\\tasks\\infrared_small_target.yaml",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\configs\\tasks\\visible_recognition.yaml",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\configs\\training\\deim_v4_45e.yaml",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\core\\config.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\core\\registry.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\core\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\data\\io.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\data\\transforms.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\data\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\deployment\\checkpoint.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\deployment\\runtime.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\deployment\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\engine\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\losses\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\metrics\\detection.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\metrics\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\optim\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\models\\adapters\\base.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\models\\adapters\\infrared_recognition.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\models\\adapters\\infrared_small_target.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\models\\adapters\\visible_recognition.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\models\\adapters\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\models\\backbones\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\models\\decoders\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\models\\encoders\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\models\\heads\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\backbone\\common.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\backbone\\csp_darknet.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\backbone\\csp_resnet.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\backbone\\hgnetv2.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\backbone\\presnet.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\backbone\\test_resnet.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\backbone\\timm_model.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\backbone\\torchvision_model.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\backbone\\utils.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\backbone\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\core\\workspace.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\core\\yaml_config.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\core\\yaml_utils.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\core\\_config.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\core\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\dataloader.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\_misc.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\box_ops.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\deim.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\deim_criterion.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\denoising.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\dfine_decoder.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\dfine_utils.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\hybrid_encoder.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\matcher.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\postprocessor.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\rtdetrv2_decoder.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\utils.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\misc\\box_ops.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\misc\\dist_utils.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\misc\\lazy_loader.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\misc\\logger.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\misc\\profiler_utils.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\misc\\visualizer.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\misc\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\optim\\amp.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\optim\\ema.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\optim\\lr_scheduler.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\optim\\optim.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\optim\\warmup.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\optim\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\solver\\clas_engine.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\solver\\clas_solver.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\solver\\det_engine.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\solver\\det_solver.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\solver\\_solver.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\solver\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\dataset\\coco_dataset.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\dataset\\coco_eval.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\dataset\\coco_utils.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\dataset\\voc_detection.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\dataset\\voc_eval.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\dataset\\_dataset.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\dataset\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\transforms\\container.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\transforms\\functional.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\transforms\\mosaic.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\transforms\\_transforms.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\transforms\\__init__.py",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\README.md",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\docs\\ARCHITECTURE.md",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\docs\\HANDOVER.md",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\rtdetrv2_pytorch\\src\\nn\\backbone\\common.py",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\rtdetrv2_pytorch\\src\\nn\\backbone\\presnet.py",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\rtdetrv2_pytorch\\src\\zoo\\rtdetr\\rtdetr.py",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\rtdetrv2_pytorch\\src\\zoo\\rtdetr\\hybrid_encoder.py",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\rtdetrv2_pytorch\\src\\zoo\\rtdetr\\rtdetrv2_decoder.py",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\rtdetrv2_pytorch\\src\\zoo\\rtdetr\\rtdetrv2_criterion.py",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\rtdetrv2_pytorch\\src\\zoo\\rtdetr\\box_ops.py",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\rtdetrv2_pytorch\\src\\zoo\\rtdetr\\denoising.py",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\rtdetrv2_pytorch\\src\\zoo\\rtdetr\\matcher.py",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\rtdetrv2_pytorch\\src\\zoo\\rtdetr\\utils.py",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\LICENSE",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\texture_comparison_20261014\\runs\\r18_recipe_texture_adaptive72_20261014\\v2\\best.pth",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\texture_comparison_20261014\\deployment\\v2\\model_fp16.engine",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\texture_comparison_20261014\\deployment\\v2\\model_fp16.build.json",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\texture_comparison_20261014\\deployment\\v2\\evaluation_fp16.json",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\downloads\\v2_s_coco.pth",
+      "unchanged": true
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+# ============================================================================
+# 模型配置: RT-DETRv2 + PResNet-18-d（红外目标识别）
+# ----------------------------------------------------------------------------
+# 来源: D:/project/RGBT/RT-DETR-main/rtdetrv2_pytorch/configs/rtdetrv2/
+#       rtdetrv2_r18vd_120e_first_date_200.yml
+# 与已导入的四类预训练权重 source_import/weights/best.pth 对应。
+# ============================================================================
+model:
+  arch: rtdetrv2
+  family: detr
+  input_size: [1024, 1280]
+
+  backbone:
+    depth: 18
+    variant: d
+    return_idx: [1, 2, 3]
+    num_stages: 4
+    freeze_at: -1
+    freeze_norm: false
+    pretrained: false
+
+  encoder:
+    in_channels: [128, 256, 512]
+    feat_strides: [8, 16, 32]
+    hidden_dim: 256
+    use_encoder_idx: [2]
+    num_encoder_layers: 1
+    nhead: 8
+    dim_feedforward: 1024
+    expansion: 0.5
+    depth_mult: 1.0
+    dropout: 0.0
+    enc_act: gelu
+    act: silu
+
+  decoder:
+    feat_channels: [256, 256, 256]
+    feat_strides: [8, 16, 32]
+    hidden_dim: 256
+    num_levels: 3
+    num_layers: 3
+    num_queries: 300
+    num_denoising: 100
+    label_noise_ratio: 0.5
+    box_noise_scale: 1.0
+    eval_idx: -1
+    num_points: [4, 4, 4]
+    cross_attn_method: default
+    query_select_method: default
+
+loss:
+  family: detr
+  losses: [vfl, boxes]
+  weight_dict: {loss_vfl: 1.5, loss_bbox: 5, loss_giou: 2}
+  alpha: 0.75
+  gamma: 2.0
+  matcher:
+    weight_dict: {cost_class: 2, cost_bbox: 5, cost_giou: 2}
+    use_focal_loss: true
+    alpha: 0.25
+    gamma: 2.0

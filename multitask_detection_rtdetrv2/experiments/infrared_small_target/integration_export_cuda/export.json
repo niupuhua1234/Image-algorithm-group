@@ -1,0 +1,19 @@
+{
+  "task_id": "infrared_small_target",
+  "algorithm": "rtdetrv2_s",
+  "input_shape": [
+    1,
+    3,
+    1024,
+    1280
+  ],
+  "output_contract": "pixel xyxy + sigmoid score",
+  "weight_sha256": "3bb56e7132b582ddf28953501d3546781d14da2884b62f9729cb708a937f5b27",
+  "onnx_sha256": "5fd8d4cf2ba615e596f4f26444e60e3bcd3cdeb69ae90036434037621cbd848c",
+  "folding_device": "cuda",
+  "transforms": [
+    "deploy branch fusion",
+    "Conv BN/FrozenBN fusion",
+    "top100 before encoder box head"
+  ]
+}

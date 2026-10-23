@@ -1,0 +1,28 @@
+defaults:
+  - ../models/rtdetrv2_s_small_target.yaml
+  - ../training/r18_small_target.yaml
+  - ../deployment/small_target.yaml
+task:
+  id: infrared_small_target
+  business_name: 红外小目标检测
+  output_spec: 目标框、目标分数、固定标签0
+  native_baseline: AA-YOLO、原RT-DETR-R18vd
+  status: implemented
+classes:
+  names: [target]
+  category_id_to_label: {0: 0}
+data:
+  root: ${INFRARED_DATA_ROOT:-D:/InfraredSmallTargetDetection/datasets/prepared/texture_20261014}
+  train: {img_folder: images/train, ann_file: annotations/instances_train.json, batch_size: 1, num_workers: 0}
+  val: {img_folder: images/val, ann_file: annotations/instances_val.json, batch_size: 1, num_workers: 0}
+  test: {img_folder: images/test, ann_file: annotations/instances_test.json, batch_size: 1, num_workers: 0}
+evaluation:
+  protocol: small_target
+  primary_iou: 0.4
+  validation_pd_target: 0.92
+  far: {unit: per_detection, definition: 'FP / (TP + FP)'}
+  size_buckets:
+    - {name: tiny, min_px: 0, max_px: 8}
+    - {name: small, min_px: 8, max_px: 16}
+    - {name: medium, min_px: 16, max_px: 32}
+    - {name: large, min_px: 32, max_px: .inf}

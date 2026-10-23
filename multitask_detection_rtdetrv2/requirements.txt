@@ -1,0 +1,10 @@
+# Infrared baseline validated with Python 3.8.20 / torch 2.0.1+cu118 / torchvision 0.15.
+# Install a CUDA wheel suitable for your GPU separately; do not upgrade an existing environment blindly.
+torch>=2.0
+torchvision>=0.15
+numpy>=1.23
+PyYAML>=6.0
+Pillow>=9.1
+scipy>=1.9
+# Optional export/backend: onnx>=1.14; TensorRT 10.8 and its matching CUDA runtime.
+# Visible DEIM retains its separate handover requirements in docs/handover_visible.

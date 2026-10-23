@@ -1,0 +1,25 @@
+defaults:
+  - ../models/rtdetrv2_r18_infrared.yaml
+  - ../training/infrared_recognition.yaml
+  - ../deployment/infrared_recognition.yaml
+
+task:
+  id: infrared_recognition
+  business_name: 红外目标识别
+  status: implemented
+  output_spec: 原图xyxy框、任务类别、分数
+  native_baseline: 外部 RGBT RT-DETRv2 R18VD
+classes:
+  names: [car1, car2, car3, car4]
+  category_id_to_label: {0: 0, 1: 1, 2: 2, 3: 3}
+data:
+  root: ${INFRARED_RECOGNITION_DATA_ROOT:-experiments/infrared_recognition/datasets/base}
+  train: {img_folder: images/train, ann_file: annotations/train.json, batch_size: 1, num_workers: 0}
+  val: {img_folder: images/val, ann_file: annotations/val.json, batch_size: 1, num_workers: 0}
+  test: {img_folder: images/test, ann_file: annotations/test.json, batch_size: 1, num_workers: 0}
+evaluation:
+  protocol: box_level_detection
+  primary_iou: 0.4
+  source_max_detections: 200
+  metrics: [detection_ap, per_class_precision_recall, class_confusion, end_to_end_latency]
+experiment: {root: experiments, stage: infrared_staging, progress_interval: 50}

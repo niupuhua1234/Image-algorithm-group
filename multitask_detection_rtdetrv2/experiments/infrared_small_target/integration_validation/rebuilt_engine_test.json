@@ -1,0 +1,64 @@
+{
+  "task_id": "infrared_small_target",
+  "algorithm": "rtdetrv2_s",
+  "split": "test",
+  "metrics": {
+    "tp": 227,
+    "fp": 4,
+    "fn": 33,
+    "targets": 260,
+    "detections": 231,
+    "images": 113,
+    "pd": 0.8730769230769231,
+    "recall": 0.8730769230769231,
+    "precision": 0.9826839826839827,
+    "fa": 0.017316017316017316,
+    "far_definition": "FP / (TP + FP)",
+    "zero_denominator": "null (undefined)",
+    "match_iou": 0.4,
+    "matching": "class-agnostic confidence-ordered one-to-one; IoU >= threshold",
+    "fp_per_image": 0.035398230088495575,
+    "size_definition": "sqrt(original bbox width * height), [min,max)",
+    "size_buckets": {
+      "tiny": {
+        "targets": 0,
+        "tp": 0,
+        "fn": 0,
+        "pd": null
+      },
+      "small": {
+        "targets": 130,
+        "tp": 107,
+        "fn": 23,
+        "pd": 0.823076923076923
+      },
+      "medium": {
+        "targets": 130,
+        "tp": 120,
+        "fn": 10,
+        "pd": 0.9230769230769231
+      },
+      "large": {
+        "targets": 0,
+        "tp": 0,
+        "fn": 0,
+        "pd": null
+      }
+    },
+    "negative_images": 0,
+    "negative_fp": 0,
+    "negative_fp_image_rate": null
+  },
+  "checkpoint": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\multitask_detection_rtdetrv2s\\experiments\\infrared_small_target\\texture_v2_s_imported\\weights\\best.pth",
+  "checkpoint_sha256": "3bb56e7132b582ddf28953501d3546781d14da2884b62f9729cb708a937f5b27",
+  "annotation_sha256": "bbc49c1f76d8e6ddf027e4dd4297186cff4b654616b456be62aac20a41eee549",
+  "class_names": [
+    "target"
+  ],
+  "operating_point": {
+    "confidence": 0.7029354572296143,
+    "nms_iou": 0.05
+  },
+  "partial_dataset": false,
+  "test_role": "existing-set regression; thresholds fixed before test"
+}

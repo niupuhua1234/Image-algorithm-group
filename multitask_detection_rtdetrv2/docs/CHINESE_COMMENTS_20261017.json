@@ -1,0 +1,304 @@
+{
+  "project": "D:\\multitask_detection_rtdetrv2_20261016",
+  "date": "2026-10-17",
+  "files": 35,
+  "added_comment_lines": 179,
+  "records": [
+    {
+      "path": "src/core/common.py",
+      "before_sha256": "ff1022f79795288877519615589b49104026646b97ab0fdedc49b8e350bf242a",
+      "after_sha256": "3dd69692c620338cb0946fd49652fb5da82a0d7ebf9f40e7d0fb5985210dec9d",
+      "added_comment_lines": 5,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/core/config.py",
+      "before_sha256": "5854c22f3cd0116408910f761e6590b701b143b6fcf4001a4ef4e2e7650f64c8",
+      "after_sha256": "835061bd6aa0d3c9f5cba590e58804f09a409531561a5b52cc412c4bc702a1ac",
+      "added_comment_lines": 3,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/core/registry.py",
+      "before_sha256": "8b0448c2c514dd40f788e06a82b504d89adbbbe0f3a904daafde5540e3dd3275",
+      "after_sha256": "9c533cff3c03e428e4b5331e14807bc6cbf7156afbabcfecbd17fec4f5fbe4ae",
+      "added_comment_lines": 2,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/data/coco.py",
+      "before_sha256": "1488f5838fc7d70e2be2aeb74fd50935355ffd1f0caea015219b62f11095c8d5",
+      "after_sha256": "e7e64db5204f8d90d30ea4c7f1c5d8c621091d69100acb65c6dbce51f849b4ee",
+      "added_comment_lines": 11,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/models/factory.py",
+      "before_sha256": "9e2d7a66ca0eb145c864d89e517d6745068dbcf848d03b90fa4595e9379abe69",
+      "after_sha256": "335b90ada0aa2487412fd154f2038b6cd191ff9ae1944585a7d507665c9d6629",
+      "added_comment_lines": 3,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/models/rtdetrv2.py",
+      "before_sha256": "236d68b7330e9aa58c1f91f0eb28cd73509d10f4d082fe9aad0a67d5540f6004",
+      "after_sha256": "866c8148194a95e0b7423d8a5847ea148811e15733539bb991303e1a62ea2ea2",
+      "added_comment_lines": 5,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/models/backbones/rtdetr.py",
+      "before_sha256": "30cd6fdfde038a7974ce0115df1e91ddd772183f05e35e7c95a89aa3774892d6",
+      "after_sha256": "9fbe8d5c918fb6aaa9a8b441a50c6cebc18fd9e1973c935c4f0543aef1df99c8",
+      "added_comment_lines": 2,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/models/encoders/rtdetr.py",
+      "before_sha256": "f1de028e2ad1b3fe97019607ddb58c17a5d8df8de7bfd0390882c4e0f9160b31",
+      "after_sha256": "9731e0e195c74251e7f407100a65371c399ef4d0ab952bd31dc277531650c395",
+      "added_comment_lines": 1,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/models/decoders/rtdetr.py",
+      "before_sha256": "78d61dc4e912c634e0c71d6d228cdf6e65d03c06165f20c83f2d8f8e8b1ad624",
+      "after_sha256": "c73cbe1a4b409aaf5b8d54b508bfec79720b3c241a9264ee6f210f0f3759deed",
+      "added_comment_lines": 1,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/models/heads/__init__.py",
+      "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_sha256": "3101732c3127fc367f97837aae636c526a84d339ac066709c0b004f9aa8ef53b",
+      "added_comment_lines": 1,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/models/adapters/base.py",
+      "before_sha256": "cc61c87c122dc12ad3d605f810221003dc01d3988e557b583c64637e6a941cf0",
+      "after_sha256": "bfd735dd9a53ef2151eb1147668294d39b656495557f04da6e883960fbb18b13",
+      "added_comment_lines": 4,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/models/adapters/detection_task.py",
+      "before_sha256": "03a66b4b1a40f7f56a68705a389cd01ecc7e479d07e5ef3042d26b443b9c5e5d",
+      "after_sha256": "ef382fee3ee07e4f1e8e02f1edd50190575232fdad7442ce8fa2fc22f740aa00",
+      "added_comment_lines": 8,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/models/adapters/detr_task.py",
+      "before_sha256": "8212a679ff611b3825e56084472af3b7ee87b4d1d860693140dfd10bb2219913",
+      "after_sha256": "c63724be975d93b30fac357aea9552f4f6fc5e379db769905a30fc6c9dc6bde1",
+      "added_comment_lines": 4,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/models/adapters/infrared_small_target.py",
+      "before_sha256": "6bcf70de781dd52bc87796ead956d57ed15669778d90986ff36f133a14b19239",
+      "after_sha256": "b89d58914a476da43183731b8b1a6ebee50b015cacb6394496fdbb12199c08a8",
+      "added_comment_lines": 5,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/models/adapters/infrared_recognition.py",
+      "before_sha256": "9e376a20e121cced37c82a1dcfbfcd6535a7f78e75a972c0d5e6fb505605a026",
+      "after_sha256": "27d5b8d9e7c61c7d89ebe15279b3bf564bec9a7a995c18e718941c010e7635f0",
+      "added_comment_lines": 3,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/models/adapters/visible_recognition.py",
+      "before_sha256": "1183dedace4cf2922fc99aa4682c9246ea1c8ea31c9f90a55e470707dee2921e",
+      "after_sha256": "b2174d2d5be0429c99556586409115cbfb4d60e5aca9a54f3bedc6bcb5a7919d",
+      "added_comment_lines": 4,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/losses/rtdetr.py",
+      "before_sha256": "a913f6c00c3d5b7a2d97bc819df5e96e12f3658bf3f0595939bddd7c1cb4d4bd",
+      "after_sha256": "97ba8b8161bab345cdfee2eaff18cb58b1392ec06ab40470d9c2da1f31ae603b",
+      "added_comment_lines": 1,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/optim/training.py",
+      "before_sha256": "6a10583b986ab88032588e0c0f52573e2954dc15ea247a6a07ac351aff87fb15",
+      "after_sha256": "7337c4899e4391ffe84058a606ccd5592a8c1f54a0092a29a2bf44f2c3aead7c",
+      "added_comment_lines": 5,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/engine/application.py",
+      "before_sha256": "19e117bff23516b31546d36ac6c562605267f316d9caae96c68b06ec068e749d",
+      "after_sha256": "9e87bacae3ab1e8bc435601ce15641eb9fa58104a9bcf9a6b47a4309a1a45063",
+      "added_comment_lines": 5,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/engine/experiment.py",
+      "before_sha256": "e01fd83e330a865cdc1db8d38abc16759a9bae61d5c602fa1fa7b302a7b7b2bd",
+      "after_sha256": "08b643187a07d5e1408ea3f931d7e7518a5529e89c605ec362ddfabc28645963",
+      "added_comment_lines": 4,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/engine/trainer.py",
+      "before_sha256": "4e5c301d493301ffa66354b6d0979a713f3d31e805b8b05045c6c32f77bef068",
+      "after_sha256": "45a4f398761af7b2919fcb4aa5b3e2671690c534479d01ff2cb5222fe0298b10",
+      "added_comment_lines": 13,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/engine/evaluation.py",
+      "before_sha256": "7a3e0f8873664617c95fa67642ef301a23f1289d2354e4c6dc48c09824775ccf",
+      "after_sha256": "f98ef5d1cd9bad8b47abb24735c166c52252323e728801071707a0ba6abec0cf",
+      "added_comment_lines": 5,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/metrics/small_target.py",
+      "before_sha256": "8a2f7d5a2c4809eed353c57e05022f2617f7b141a882edc826d35ebbdaf2b230",
+      "after_sha256": "42510d0b83738f87b7be500d323bad61e59454fb88f72ec13efe9a9cc8846436",
+      "added_comment_lines": 11,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/deployment/postprocess.py",
+      "before_sha256": "0a74ee6399da9208e9ebe4f7cc77c10a463fa503fe28a828419d14e6b452ec37",
+      "after_sha256": "fa37edd3c7cedc6cb191560beb8c2d3a506f03ae385964c2a9483a0643af46cb",
+      "added_comment_lines": 8,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/deployment/weights.py",
+      "before_sha256": "22e2e04985f406d48f0a00c211491089f175b73cf601d209450826b76b2a4564",
+      "after_sha256": "2ca50a9859b22f700aa473b4ab8914ea928dfbf631529126534ddadb2f36a31b",
+      "added_comment_lines": 4,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/deployment/backends.py",
+      "before_sha256": "991c155c25ac4e795befa635269bb2ef168aa4a20b2e78ce744b1cee41d0c3b1",
+      "after_sha256": "ae515a431c4a18871364ad45819ee0581ef0475a52dba23f4a93ff2a1d233483",
+      "added_comment_lines": 13,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/deployment/unified_runtime.py",
+      "before_sha256": "5bd918259bb3142e3de845eac7e81cb908ee9cbf4cf30ed3477933bb1a3ce108",
+      "after_sha256": "1ce35dab8b15f4c1458d396536876e960a4810abc32275cf70f01c6af2c2f523",
+      "added_comment_lines": 10,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/deployment/transforms.py",
+      "before_sha256": "e8d4a4f85cd2164c8d01fe2c8dd42c7d088e033c1dd965978db2b12cde632399",
+      "after_sha256": "e3adcc1cdc6cbd307ac1112c9c086e21b177bfef88b983ddd938bc0eb9d0fc53",
+      "added_comment_lines": 11,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "src/deployment/export.py",
+      "before_sha256": "d1759d0d3155971193aad72c738be193aa8e747fa9bad1add1428e6615b2eddf",
+      "after_sha256": "f96905e10ee6ac08f636654d44dc67d0343ad1f1238ebff948b1bb55f230613d",
+      "added_comment_lines": 10,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "tools/train.py",
+      "before_sha256": "5a385cd9b2bc88df00b9130f6e3696238f643d969ebd52eaad99fadaec669e47",
+      "after_sha256": "03d7f9a645408af3136a3b3d8b4dd3e805d243c9aa957af99b0c96d9f93f9103",
+      "added_comment_lines": 4,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "tools/eval.py",
+      "before_sha256": "87296a77bf1bc2ad1a16a5cf8ef8eab261185720c7d4c27a3f5f8fce04bc5f3b",
+      "after_sha256": "34f8e4c8bf3a6093ae9c5c729a7f68c42beff7e4ca9308fa6d906ff7acc66f87",
+      "added_comment_lines": 3,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "tools/infer.py",
+      "before_sha256": "343c46959a39a277db19a10dc0e1c80bdeb18681316f4576075a5bed0365e5d6",
+      "after_sha256": "7d467ee2e4f6793af7e11dc80ec7634f6c91e6b0986239f616a7f82e53b67cd9",
+      "added_comment_lines": 2,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "tools/export.py",
+      "before_sha256": "0d564aeb335d7c94f6d6431755833558fde87125e395e224fdb8e21af7a5bc2c",
+      "after_sha256": "5d1039c31cba30db0600960a07d7f51f89a3daef2381eccfb7afa6864a0a3228",
+      "added_comment_lines": 2,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "tools/calibrate.py",
+      "before_sha256": "ddfd80152c37c7da04e4545e263adc5ceff3ae426ac23347c522fa75b9a2ac1e",
+      "after_sha256": "cab8e449b38fa50907d2ef935e0596cc7b5d9f449796de4266738fb3dd1a213b",
+      "added_comment_lines": 4,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    },
+    {
+      "path": "tools/list_tasks.py",
+      "before_sha256": "43e8d4556999dda1a47ab4b1c5947068592734dd52a731fccfee1ed6ba53231a",
+      "after_sha256": "eefd8efaabf9ee842945e645864ae4ae5c2c791f218b0960b191baee1b1090cb",
+      "added_comment_lines": 2,
+      "ast_equal": true,
+      "non_comment_tokens_equal": true
+    }
+  ],
+  "note": "仅新增中文 # 注释；文档字符串、有效语法树及非注释词法单元均保持一致。",
+  "backup_directory": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\tmp\\chinese_comments_20261017\\before",
+  "shipment_manifest_role": "SHIPMENT_MANIFEST.json 保留为 2026-10-16 原始交付记录；本记录提供注释前后源码指纹。",
+  "delivery_audit": {
+    "annotated_files_verified": 35,
+    "all_first_party_python_syntax": "passed",
+    "first_party_python_files": 55,
+    "other_shipment_files_unchanged": 152,
+    "unexpected_changes": []
+  },
+  "existing_unit_tests": {
+    "command": "python -B -X utf8 -m unittest discover -s tests -v",
+    "status": "passed",
+    "tests": 9,
+    "date": "2026-10-17"
+  }
+}

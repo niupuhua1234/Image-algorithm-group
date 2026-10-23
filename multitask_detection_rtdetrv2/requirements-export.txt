@@ -1,0 +1,3 @@
+# Optional; use an isolated environment or the existing explicit dependency directory.
+onnx>=1.14
+# TensorRT must match the GPU, CUDA runtime and target platform; install independently.

@@ -1,0 +1,4 @@
+# Compatibility path. The canonical task now follows the standard
+# configs/tasks layout used by the other branches.
+defaults:
+  - ../../configs/tasks/infrared_recognition.yaml

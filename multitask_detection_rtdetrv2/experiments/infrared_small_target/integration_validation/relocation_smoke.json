@@ -1,0 +1,54 @@
+{
+  "task_id": "infrared_small_target",
+  "timing": {
+    "mean_ms": 39.25190500000011,
+    "p95_ms": 39.899469999999404,
+    "max_ms": 39.9976999999998,
+    "samples": 20,
+    "over_45_ms": 0,
+    "raw_ms": [
+      39.442800000000666,
+      38.83670000000006,
+      39.32900000000039,
+      38.93009999999997,
+      39.51539999999998,
+      39.663000000000004,
+      38.75069999999958,
+      39.39870000000045,
+      38.75730000000033,
+      39.25330000000038,
+      39.89429999999938,
+      39.07660000000046,
+      39.07330000000009,
+      38.69580000000017,
+      39.6314999999996,
+      38.944000000000756,
+      39.9976999999998,
+      39.606599999999936,
+      39.1881000000005,
+      39.05319999999968
+    ],
+    "peak_allocated_mib": 19.751953125,
+    "peak_reserved_mib": 38.0,
+    "backend_resources": {
+      "engine_context_device_memory_mib": 191.875,
+      "note": "Engine context requirement, not total process GPU memory"
+    },
+    "resource_scope": "PyTorch allocator; external TensorRT/CUDA context allocations are not fully included",
+    "input_size_hw": [
+      1024,
+      1280
+    ],
+    "backend": "tensorrt",
+    "boundary": "decoded CPU RGB uint8 -> preprocessing, H2D, model, decode, D2H, threshold/NMS, CPU Detection",
+    "excluded": [
+      "disk IO/image decoding",
+      "initialization",
+      "warmup",
+      "metric matching"
+    ],
+    "gpu": "NVIDIA GeForce GTX 1650 Ti",
+    "concurrent_models": false,
+    "official_orin_three_model_verified": false
+  }
+}

@@ -1,0 +1,15 @@
+deployment:
+  input_size: [1024, 1280]
+  default_backend: pytorch
+  backends: [pytorch, tensorrt]
+  checkpoint: experiments/infrared_small_target/texture_v2_s_imported/weights/best.pth
+  engine: experiments/infrared_small_target/texture_v2_s_imported/deployment/model_fp16.engine
+  engine_metadata: experiments/infrared_small_target/texture_v2_s_imported/deployment/model_fp16.build.json
+  checkpoint_sha256: 3bb56e7132b582ddf28953501d3546781d14da2884b62f9729cb708a937f5b27
+  conf_threshold: 0.7029354572296143
+  postprocess: confidence_then_optional_nms
+  nms_iou: 0.05
+  trt_library_root: ${TENSORRT_ROOT:-}
+  precision: fp16
+  topk_box_head: true
+  benchmark: {warmup: 10, runs: 200}

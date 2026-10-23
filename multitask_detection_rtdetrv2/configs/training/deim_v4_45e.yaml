@@ -1,0 +1,108 @@
+# ============================================================================
+# 训练配方: DEIM 增强 (45 epoch)
+# ----------------------------------------------------------------------------
+# 数值来自本地 deim 仓库的最终生效配置(YAMLConfig 解析 include 链之后)。
+# 完整超参数与坑位说明见 DEIM_v4_超参数与交接说明.md。
+#
+# 技术路线书第三阶段要求"单因素消融", 因此这里把 DEIM 的两个核心改进
+# 显式暴露为 ablation 开关, 便于逐项对照。
+# ============================================================================
+train:
+  input_size: 960                       # 覆盖基线的 640
+  epoches: 45
+  batch_size: 8
+  num_workers: 6
+  clip_max_norm: 0.1
+  use_amp: true
+  use_ema: true
+  ema:
+    decay: 0.9999
+    warmups: 2000
+  # MixUp(collate_fn 层)
+  mixup_prob: 0.5
+  # 修正: 原配置继承链留下 [4, 64] 而 epoches 只有 45, 导致 MixUp 全程开启。
+  #       这里显式对齐 Mosaic 的关闭点(policy.epoch[1] = 24)。
+  mixup_epochs: [4, 24]
+
+# ---- 优化器 ----
+optimizer:
+  type: AdamW
+  lr: 0.0002                            # 2e-4
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+  # 注意: 原配置里 backbone 专属 lr(1e-5)被上层 optimizer.params 整体替换掉了,
+  #       实际 backbone 使用全局 lr。若要恢复分档, 在此显式声明 backbone_lr。
+  backbone_lr: null
+  no_weight_decay_pattern: '^(?=.*(?:norm|bn)).*$'
+
+# ---- 学习率调度 ----
+scheduler:
+  type: flatcosine
+  lr_gamma: 0.5                         # lr 下限 = 2e-4 * 0.5
+  warmup_iter: 2000
+  flat_epoch: 24                        # = 4 + epoches/2
+  no_aug_epoch: 2
+
+# ---- 数据增强(DEIM 的 Dense O2O 实现手段)----
+augmentation:
+  train:
+    # 策略按 epoch 分段切换: [Mosaic 起点, Mosaic 终点, 全部关闭点]
+    policy:
+      epoch: [4, 24, 43]
+      ops: [Mosaic, RandomPhotometricDistort, RandomZoomOut, RandomIoUCrop]
+    ops:
+      # ⚠️ output_size 320 会把 4 张 960 图压到 320 画布, 本项目 car 目标中位
+      #    等效边长 32px 会被压到约 10px。技术路线书专门要求检查这一条:
+      #    "对 DEIM 增强检查是否过度缩小微小目标"。
+      #    消融建议: 把 output_size 提到 640 并降低 probability 作为对照项。
+      - {type: Mosaic, output_size: 320, rotation_range: 10,
+         translation_range: [0.1, 0.1], scaling_range: [0.5, 1.5],
+         probability: 1.0, fill_value: 0, use_cache: false,
+         max_cached_images: 50, random_pop: true}
+      - {type: RandomPhotometricDistort, p: 0.5}
+      - {type: RandomZoomOut, fill: 0}
+      - {type: RandomIoUCrop, p: 0.8}
+      - {type: SanitizeBoundingBoxes, min_size: 1}
+      - {type: RandomHorizontalFlip}
+      - {type: Resize, size: [960, 960]}
+      - {type: SanitizeBoundingBoxes, min_size: 1}
+      - {type: ConvertPILImage, dtype: float32, scale: true}
+      - {type: ConvertBoxes, fmt: cxcywh, normalize: true}
+  val:
+    ops:
+      - {type: Resize, size: [960, 960]}
+      - {type: ConvertPILImage, dtype: float32, scale: true}
+      - {type: ConvertBoxes, fmt: cxcywh, normalize: true}
+
+# ============================================================================
+# 单因素消融开关(技术路线书第三阶段: "每次优先改变一个主要因素")
+# ----------------------------------------------------------------------------
+# 用法: 在任务配置的 defaults 之后覆盖, 例如
+#   load_config('visible_recognition', overrides={'ablation': {'use_dense_o2o': False}})
+# 或直接命令行: python tools/train.py --task visible_recognition --no-dense-o2o
+# ============================================================================
+ablation:
+  # Dense O2O: 通过 Mosaic/MixUp 人为增加每图目标数, 提高一对一匹配的正样本数
+  use_dense_o2o: true
+  # MAL: 用 Matchability-Aware Loss 替代 vfl 作为分类损失
+  use_mal: true
+  # 解冻 BN(DEIM 的工程改动之一)
+  unfreeze_bn: true
+  # 采样方式: default(grid_sample) | discrete(部署友好, 但必须重训/微调)
+  cross_attn_method: default
+
+  notes:
+    - Dense O2O 关闭时应同时把 Mosaic 的 probability 置 0, 否则不是干净的单因素对照
+    - MAL 关闭时 loss.losses 应换成 [vfl, boxes] 并把 alpha/gamma 恢复为 0.75 / 2.0
+    - cross_attn_method 切换需完整训练, 不能仅在导出前替换算子(路线书 4.1)
+
+# ---- 实验记录要求(路线书第 6 节)----
+record:
+  fields:
+    - data_split               # 数据划分
+    - pretrain_source          # 预训练来源
+    - input_size               # 输入尺寸
+    - train_budget             # 训练预算
+    - eval_rule                # 评价规则
+  select_on: val               # 权重与阈值在验证集选择
+  report_on: test              # 测试集用于最终评价

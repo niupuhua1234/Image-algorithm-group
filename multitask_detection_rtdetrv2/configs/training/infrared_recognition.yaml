@@ -1,0 +1,39 @@
+augmentation:
+  train:
+    policy: {name: stop_epoch, epoch: 140, ops: [RandomIoUCrop]}
+    ops:
+      - {type: RandomIoUCrop, p: 0.10}
+      - {type: SanitizeBoundingBoxes, min_size: 1}
+      - {type: RandomHorizontalFlip}
+      - {type: RandomVerticalFlip}
+      - {type: RandomPhotometricDistort, p: 0.7}
+      - {type: Resize, size: [1024, 1280]}
+      - {type: SanitizeBoundingBoxes, min_size: 1}
+      - {type: ConvertPILImage, dtype: float32, scale: true}
+      - {type: ConvertBoxes, fmt: cxcywh, normalize: true}
+  val:
+    ops:
+      - {type: Resize, size: [1024, 1280]}
+      - {type: ConvertPILImage, dtype: float32, scale: true}
+      - {type: ConvertBoxes, fmt: cxcywh, normalize: true}
+  test:
+    ops:
+      - {type: Resize, size: [1024, 1280]}
+      - {type: ConvertPILImage, dtype: float32, scale: true}
+      - {type: ConvertBoxes, fmt: cxcywh, normalize: true}
+train:
+  trainer: supervised_detection
+  epoches: 160
+  input_size: [1024, 1280]
+  batch_size: 1
+  num_workers: 0
+  precision: amp
+  seed: 3407
+  clip_max_norm: 0.1
+  initialize: experiments/infrared_recognition/source_import/weights/best.pth
+  ema: {decay: 0.9999, warmups: 2000}
+  warmup_steps: 16
+  checkpoint_frequency: 10
+  checkpoint_selection: source_rtdetr_recall_ap40
+optimizer: {type: AdamW, lr: 0.0001, backbone_lr: 0.00001, weight_decay: 0.0001}
+scheduler: {milestones: [120, 180], gamma: 0.1}

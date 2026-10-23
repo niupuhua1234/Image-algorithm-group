@@ -1,0 +1,10 @@
+# References are kept separate from implemented algorithm registrations.
+native_baselines:
+  rtdetr_r18vd:
+    task: infrared_small_target
+    status: external_preserved
+    project: D:/InfraredSmallTargetDetection
+    checkpoint: D:/InfraredSmallTargetDetection/weights/rtdetr/vedai_real_synth_best.pth
+  aa_yolo: {task: infrared_small_target, status: reserved_not_available}
+  yolo: {task: infrared_recognition, status: reserved_not_available}
+  deim: {task: visible_recognition, status: handover_available, source: third_party/deim_engine}

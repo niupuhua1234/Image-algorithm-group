@@ -1,0 +1,2 @@
+# Compatibility include; the algorithm config is independent of task.
+defaults: [rtdetrv2_s.yaml]

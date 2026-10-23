@@ -1,0 +1,74 @@
+# ============================================================================
+# 任务配置: 可见光目标识别 (visible_recognition)
+# ----------------------------------------------------------------------------
+# 技术路线书 5.2:
+#   业务内容      可见光目标识别
+#   输出要求      目标框、任务类别、分数
+#   原生对照方法  DEIM
+#   主线建设方式  v2 基线与 DEIM 增强训练对照; 后续开展 v4 的基础模型接入
+#
+# 本文件是本阶段唯一完整实现的任务配置。
+# ============================================================================
+defaults:
+  - ../models/rtdetrv2_r18_visible.yaml       # 模型: RT-DETRv2 主干
+  - ../training/deim_v4_45e.yaml              # 训练: DEIM 增强配方
+
+task:
+  id: visible_recognition
+  business_name: 可见光目标识别
+  output_spec: 目标框、任务类别、分数
+  native_baseline: DEIM
+  mainline_plan: v2 基线与 DEIM 增强训练对照; 后续开展 v4 的基础模型接入
+  status: handover_available
+
+# ---- 类别体系(独立管理, 禁止与其他任务混用)----
+classes:
+  names: [car, truck, bus, van, pickup, tank]
+
+# ---- 数据 ----
+data:
+  root: ${DATA_ROOT:-D:/BaiduNetdiskDownload/wdd_work}
+  train:
+    img_folder: data/car_union_bal25_1280/train
+    ann_file: deim/data_car_union_bal1280/car_union_bal1280_train_v4.json
+    batch_size: 8
+    num_workers: 6
+    base_size_repeat: 1
+    stop_epoch: 45
+    # 注意: JSON 只引用 37,847 张; 目录里有 50,024 张(12,177 张旧格式残留)
+    #       必须以 JSON 引用为准, 详见 DEIM_v4_超参数与交接说明.md 坑 1
+  val:
+    img_folder: data/car_union_bal25_1280/val
+    ann_file: deim/data_car_union_bal1280/car_union_bal1280_val.json
+    batch_size: 32
+    num_workers: 6
+  test:
+    img_folder: data/car_union_bal25_1280/test
+    ann_file: deim/data_car_union_bal1280/car_union_bal1280_test.json
+    batch_size: 32
+    num_workers: 6
+
+# ---- 评测口径(路线书第 6 节: 框级识别)----
+evaluation:
+  protocol: box_level_detection
+  primary_iou: 0.5
+  report_iou_range: [0.5, 0.95]
+  metrics:
+    - detection_ap              # 检测 AP
+    - per_class_precision_recall # 逐类别精度与召回
+    - class_confusion            # 匹配目标上的类别混淆情况
+    - end_to_end_latency         # 完整业务时延
+  # 项目历史口径(recall 式), 仅用于与既有结果对照, 不作为主线指标
+  legacy_protocol:
+    name: recall_style
+    rule: 类别一致 且 IoU >= 0.40 的贪心匹配
+    counting: 分母为 GT 总数, 不惩罚误检
+    reference_result: 0.9036 (50939/56375) @conf 0.005
+
+# ---- 部署 ----
+deployment:
+  default_imgsz: 1024
+  conf_threshold: 0.005          # 项目验收口径的操作点
+  postprocess: set_prediction    # 集合预测, 无 NMS
+  backends: [pytorch, cuda_graph, tensorrt]
+

@@ -1,0 +1,602 @@
+[
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\README.md",
+    "destination": "README.md",
+    "sha256": "d86ade6ed36c751f567b0b5c3cc66a529497f0664178362b0a968a1362a862b4"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\requirements.txt",
+    "destination": "requirements.txt",
+    "sha256": "42f0b5fcc1291aae0588b520ffb0923a421c25e708435cbbe09d3c61ba26f695"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\docs\\ARCHITECTURE.md",
+    "destination": "docs\\ARCHITECTURE.md",
+    "sha256": "2f0bef78f1ac1fd72ec9af6e16d848326969166e6e55c5df3b19e8738a79ea34"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\docs\\HANDOVER.md",
+    "destination": "docs\\HANDOVER.md",
+    "sha256": "ffefff657f4bdcf0aed14ff5428bb710eb4247cc8738f188c4d21da75a73cc4c"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\__init__.py",
+    "destination": "src\\__init__.py",
+    "sha256": "f1f3927111350d5a76c3a07f88e6ce89f2fe42afd8fbcf12f4657b06f948ac4c"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\patch_tw.py",
+    "destination": "third_party\\patch_tw.py",
+    "sha256": "df6ed9a3ffc1144bfdd9b2c2304e04b2bd6ca324b6cfdeade86e8aa618aa73e8"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\VERSION.md",
+    "destination": "third_party\\VERSION.md",
+    "sha256": "40167e7ace942f2535ebca5bd24253427094ba10abf1c8199b70fa5241040e9c"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\tools\\eval.py",
+    "destination": "tools\\eval.py",
+    "sha256": "df2cfe98a48bde692d161292ecb1986c84efd556d57b74f8499f17b443635d53"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\tools\\infer.py",
+    "destination": "tools\\infer.py",
+    "sha256": "b6bf0b6518f6d64a9a8a25ab3ef068ef1a783c4188b95078658d5e641749c2a2"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\tools\\list_tasks.py",
+    "destination": "tools\\list_tasks.py",
+    "sha256": "1f810aeb2b4a847002db67cbe3d48143be494467cbdf3de96219a6f947a6e80e"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\tools\\train.py",
+    "destination": "tools\\train.py",
+    "sha256": "63e8bd01fadb58e22ecadf13add27988b9971d20fbb8d3b6010ea78709270e6d"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\configs\\models\\rtdetrv2_r18_visible.yaml",
+    "destination": "configs\\models\\rtdetrv2_r18_visible.yaml",
+    "sha256": "2b54dece0c18e40ea69283227e081b96da2d13469c394f65e97478fd534e1a9f"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\configs\\tasks\\infrared_recognition.yaml",
+    "destination": "configs\\tasks\\infrared_recognition.yaml",
+    "sha256": "fe72539bd1c5f10c2bcc477d07a6fe2c7130e25d7bf8e35ba5c4327dbace063c"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\configs\\tasks\\infrared_small_target.yaml",
+    "destination": "configs\\tasks\\infrared_small_target.yaml",
+    "sha256": "a52ef6a2da48e740634f1c0016e6676ca8efb27f37eb27c249074c171bcd8fea"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\configs\\tasks\\visible_recognition.yaml",
+    "destination": "configs\\tasks\\visible_recognition.yaml",
+    "sha256": "eae778d7a3ceb7881dba124115b3345bcd10cc6245f7bc2b1b65a7da23a04f95"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\configs\\training\\deim_v4_45e.yaml",
+    "destination": "configs\\training\\deim_v4_45e.yaml",
+    "sha256": "6b9258a4980f7fc85eb4d35c555cd4d7ea8c510a6feae4e254773286cfd797cf"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\core\\config.py",
+    "destination": "src\\core\\config.py",
+    "sha256": "51c900728d9a2939cc6790c68c936a19c542915aa5dfef071f0e738be01d77ef"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\core\\registry.py",
+    "destination": "src\\core\\registry.py",
+    "sha256": "8b0448c2c514dd40f788e06a82b504d89adbbbe0f3a904daafde5540e3dd3275"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\core\\__init__.py",
+    "destination": "src\\core\\__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\data\\io.py",
+    "destination": "src\\data\\io.py",
+    "sha256": "6b3512d9d4e7de1734026bc97e7eb6adbb8e23fd01851f59c3c650fe03570672"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\data\\transforms.py",
+    "destination": "src\\data\\transforms.py",
+    "sha256": "42795e5117c921eaee595099f417098dc21aa0e48a30924c3a1e45e27a28d3e1"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\data\\__init__.py",
+    "destination": "src\\data\\__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\deployment\\checkpoint.py",
+    "destination": "src\\deployment\\checkpoint.py",
+    "sha256": "23d5d86015379ccb0dd26123c61b28df58b021bc1e752fcb39f75894e7c70f85"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\deployment\\runtime.py",
+    "destination": "src\\deployment\\runtime.py",
+    "sha256": "a7c0ec24ec581e032ad82ea9e53304265cadd0396cb478e8fa27fa57323f4320"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\deployment\\__init__.py",
+    "destination": "src\\deployment\\__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\engine\\__init__.py",
+    "destination": "src\\engine\\__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\losses\\__init__.py",
+    "destination": "src\\losses\\__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\metrics\\detection.py",
+    "destination": "src\\metrics\\detection.py",
+    "sha256": "30903d5e5794dd3b0b6366592503159a46134e0d438cd4d8da5ab76c37f75a35"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\metrics\\__init__.py",
+    "destination": "src\\metrics\\__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\optim\\__init__.py",
+    "destination": "src\\optim\\__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\models\\adapters\\base.py",
+    "destination": "src\\models\\adapters\\base.py",
+    "sha256": "1edaee7ecba7b1d3e5b433f03d7033280cb99f5d42caa7f6b3430e2741eb5492"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\models\\adapters\\infrared_recognition.py",
+    "destination": "src\\models\\adapters\\infrared_recognition.py",
+    "sha256": "cc5e4f3db8a2c56fe3cfe2cf710b542ed343763c1099e2909c3c26015ed792c5"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\models\\adapters\\infrared_small_target.py",
+    "destination": "src\\models\\adapters\\infrared_small_target.py",
+    "sha256": "caf2ebdf4d7a8da0ef66405059cb62010c9faaf7c9f23175ef85d07abd5e4d18"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\models\\adapters\\visible_recognition.py",
+    "destination": "src\\models\\adapters\\visible_recognition.py",
+    "sha256": "1eeb0681c89481421c09a14e57838392ac2d425b120b819c36b3a1cbedc1b843"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\models\\adapters\\__init__.py",
+    "destination": "src\\models\\adapters\\__init__.py",
+    "sha256": "0154466aa4010670942330abe6470a86bd97b603a4fff941c07260bdd4c00b12"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\models\\backbones\\__init__.py",
+    "destination": "src\\models\\backbones\\__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\models\\decoders\\__init__.py",
+    "destination": "src\\models\\decoders\\__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\models\\encoders\\__init__.py",
+    "destination": "src\\models\\encoders\\__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\src\\models\\heads\\__init__.py",
+    "destination": "src\\models\\heads\\__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\__init__.py",
+    "destination": "third_party\\deim_engine\\__init__.py",
+    "sha256": "d2d2000c38d68cb2591db5366be7643cd6004be6b31d03234bfb680f77559dd3"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\backbone\\common.py",
+    "destination": "third_party\\deim_engine\\backbone\\common.py",
+    "sha256": "3c99326a2b84e3f7b1a08a56651dbb97d012e63513df06d4e173758f82e35002"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\backbone\\csp_darknet.py",
+    "destination": "third_party\\deim_engine\\backbone\\csp_darknet.py",
+    "sha256": "15d680dbe082c76a867b4c6ead90d77a6e5a92a094b8630e7da3c9c99090b81b"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\backbone\\csp_resnet.py",
+    "destination": "third_party\\deim_engine\\backbone\\csp_resnet.py",
+    "sha256": "399b1e3a7c9afd9c00f914c938f51c08ee1dcf09a5cd5ab52b38e311e7dfda07"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\backbone\\hgnetv2.py",
+    "destination": "third_party\\deim_engine\\backbone\\hgnetv2.py",
+    "sha256": "e218c58afcfe84aa5e30e4de873d9a431fd99c50c604f67291ee8e69e9858968"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\backbone\\presnet.py",
+    "destination": "third_party\\deim_engine\\backbone\\presnet.py",
+    "sha256": "54fb81ab7bece7a63c2a46677036f7b1a44645e328ff673b3221063b70d84445"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\backbone\\test_resnet.py",
+    "destination": "third_party\\deim_engine\\backbone\\test_resnet.py",
+    "sha256": "f48a7fa9e7648495c838688eaba9656e555397b2897d776b34359b44cfd10481"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\backbone\\timm_model.py",
+    "destination": "third_party\\deim_engine\\backbone\\timm_model.py",
+    "sha256": "37eb4adcd2f7246222fb68c31de3a1e6b4938e3f8e243305b8aa7d43ae990958"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\backbone\\torchvision_model.py",
+    "destination": "third_party\\deim_engine\\backbone\\torchvision_model.py",
+    "sha256": "9dae18d6b8cf8f88457ca59ca29eedd93d0b8689c09f704593209f50f46434aa"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\backbone\\utils.py",
+    "destination": "third_party\\deim_engine\\backbone\\utils.py",
+    "sha256": "e2bcc909a479a7ce06f77a0093e656e2e3da531f745dc6791e8fc76037a69ad5"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\backbone\\__init__.py",
+    "destination": "third_party\\deim_engine\\backbone\\__init__.py",
+    "sha256": "527bb4bfed0e9cf8509affb08740c2da9144d84aaa0888e5bb98b4a90a6ccfaa"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\core\\workspace.py",
+    "destination": "third_party\\deim_engine\\core\\workspace.py",
+    "sha256": "5529cd6f79ee1db0f6623d10e4d74ad6281ffdbe646b3fef60ef045407a656b9"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\core\\yaml_config.py",
+    "destination": "third_party\\deim_engine\\core\\yaml_config.py",
+    "sha256": "cf66f3d74f0291831c383f1bf495431d9487e1eab00ea8935bb2f2224cccd31d"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\core\\yaml_utils.py",
+    "destination": "third_party\\deim_engine\\core\\yaml_utils.py",
+    "sha256": "bbb88010c0e48beeea5be3a063d1ed3e058eee584f7a9923f077384f0e5dbcda"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\core\\_config.py",
+    "destination": "third_party\\deim_engine\\core\\_config.py",
+    "sha256": "c7658cdaca896f3952f70a9b64808349615f827341fc31a94587ed8894428802"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\core\\__init__.py",
+    "destination": "third_party\\deim_engine\\core\\__init__.py",
+    "sha256": "b20b7267f86929d2ba3f59e494e5a5fe56e24ca2a1967cdebeaab905f3cd2475"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\dataloader.py",
+    "destination": "third_party\\deim_engine\\data\\dataloader.py",
+    "sha256": "a31d61102bed2fca5d33dbbc56acf8f2eb940786e25a9a28efd02170dac0ceb7"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\_misc.py",
+    "destination": "third_party\\deim_engine\\data\\_misc.py",
+    "sha256": "85099a5b66d4496575d31a4e3a73dffea3ddfef34a60f43d3e4569b66809703a"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\__init__.py",
+    "destination": "third_party\\deim_engine\\data\\__init__.py",
+    "sha256": "053256faf34bdcbb274bcc069e1c4b440947c77899c3757d0cf541cf6966a45c"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\box_ops.py",
+    "destination": "third_party\\deim_engine\\deim\\box_ops.py",
+    "sha256": "ca374c756f45508f07fb8ba4850be327cefcd6eb199000dd9ccbd7d6545537ef"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\deim.py",
+    "destination": "third_party\\deim_engine\\deim\\deim.py",
+    "sha256": "636131aef151096d2b7da041be9d27ed8086d96e31ba9604841ca1a04bd84647"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\deim_criterion.py",
+    "destination": "third_party\\deim_engine\\deim\\deim_criterion.py",
+    "sha256": "380a7d86b71ba9a3cbbdb670b4c11a3f2bfd2e367ffe87db7ef8e9ba30806dd2"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\denoising.py",
+    "destination": "third_party\\deim_engine\\deim\\denoising.py",
+    "sha256": "e6b755cd1eee2f6016d38b873c3ddffa18bc8bceb6044f92927144ef8da2eeef"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\dfine_decoder.py",
+    "destination": "third_party\\deim_engine\\deim\\dfine_decoder.py",
+    "sha256": "fa21b40d769f1528c92abb207bf3cc2a4386e041a5d3bdceb99550ab9954d733"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\dfine_utils.py",
+    "destination": "third_party\\deim_engine\\deim\\dfine_utils.py",
+    "sha256": "c546cd277eded116783a29a1a9abea6408a4a807e748bd2c1222b4bbfdb88510"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\hybrid_encoder.py",
+    "destination": "third_party\\deim_engine\\deim\\hybrid_encoder.py",
+    "sha256": "e5041dc1833962506f83d4fdd36204284de8808f76b2a181a06d5db80315c19f"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\matcher.py",
+    "destination": "third_party\\deim_engine\\deim\\matcher.py",
+    "sha256": "745aca6e52510171b4c616e5ae7d23bef916b0af989da7594e7348ce0cd3cf5e"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\postprocessor.py",
+    "destination": "third_party\\deim_engine\\deim\\postprocessor.py",
+    "sha256": "f3ff32b17558178d59c1fe88377ec404b43bd24de06d5ce607159062f261e918"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\rtdetrv2_decoder.py",
+    "destination": "third_party\\deim_engine\\deim\\rtdetrv2_decoder.py",
+    "sha256": "32b3c0a30e85a0f425cfe5739120d00aa52c247c41d17ec1017f4d9304b49001"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\utils.py",
+    "destination": "third_party\\deim_engine\\deim\\utils.py",
+    "sha256": "830dc50196fc92e5d3871b9bbb24834abe1928974c3e3d42aa4ffac38a0355b3"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\deim\\__init__.py",
+    "destination": "third_party\\deim_engine\\deim\\__init__.py",
+    "sha256": "0cf478090246f88e50d90a9216735b38696ac458cb3ecb08a410ee5bc92e2872"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\misc\\box_ops.py",
+    "destination": "third_party\\deim_engine\\misc\\box_ops.py",
+    "sha256": "507f491779819e8bbab76039d423a6f63f3498d3dde7ffcb0edaf798669fb3fa"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\misc\\dist_utils.py",
+    "destination": "third_party\\deim_engine\\misc\\dist_utils.py",
+    "sha256": "683f0f5898d1ecc6c54974a8082cea2a74c0f18b2ff2df96539bfc5814a49b48"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\misc\\lazy_loader.py",
+    "destination": "third_party\\deim_engine\\misc\\lazy_loader.py",
+    "sha256": "6cd831c6aa1eb13866933a21d42fa0fac3d772319120786362877b523bdf7c7d"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\misc\\logger.py",
+    "destination": "third_party\\deim_engine\\misc\\logger.py",
+    "sha256": "c9d66368341d0006a0147817cc850e22146c16a2fd375a7954ae9781a8ffd4f8"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\misc\\profiler_utils.py",
+    "destination": "third_party\\deim_engine\\misc\\profiler_utils.py",
+    "sha256": "3e4c8355a7457f474f9f7e36af2c65ce9e878e7233d2becafe893fe29764ae7c"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\misc\\visualizer.py",
+    "destination": "third_party\\deim_engine\\misc\\visualizer.py",
+    "sha256": "db3e1c6b23a3a7d8186c7786354b161859a4d00db60991a1e405f6eb484572d0"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\misc\\__init__.py",
+    "destination": "third_party\\deim_engine\\misc\\__init__.py",
+    "sha256": "1409a522e890456a3e9047d36d23ec05f5a96e9ce60bf2aba8d569e20a279ecd"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\optim\\amp.py",
+    "destination": "third_party\\deim_engine\\optim\\amp.py",
+    "sha256": "6e11a55bca958224d062d6a11518aee62787b1018727d94a152428752c3e91cf"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\optim\\ema.py",
+    "destination": "third_party\\deim_engine\\optim\\ema.py",
+    "sha256": "bdd8ab69529b086f4ff4f229328a79e2153cbf6bda1c09fd015d7cb447bf208a"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\optim\\lr_scheduler.py",
+    "destination": "third_party\\deim_engine\\optim\\lr_scheduler.py",
+    "sha256": "e02199d51be78a434771ff51ce4d22f11f7c83756d62f3104263568206a15374"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\optim\\optim.py",
+    "destination": "third_party\\deim_engine\\optim\\optim.py",
+    "sha256": "4395e1fd941f13bec06b95732bb446df7d10256e74fd494a49511090bbc20cd0"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\optim\\warmup.py",
+    "destination": "third_party\\deim_engine\\optim\\warmup.py",
+    "sha256": "ff80c9b762be57af4abd0a6a843d5d50bbc4887db19d85cb74887615d7ea7432"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\optim\\__init__.py",
+    "destination": "third_party\\deim_engine\\optim\\__init__.py",
+    "sha256": "873f91c02a22f14912420e03d53e90919cc8f9324f6d2166b6e919f80764ccef"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\solver\\clas_engine.py",
+    "destination": "third_party\\deim_engine\\solver\\clas_engine.py",
+    "sha256": "216be5a2d29d664265aea35c2c019742a29a6ff716f19fe14ec635c97c7d6396"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\solver\\clas_solver.py",
+    "destination": "third_party\\deim_engine\\solver\\clas_solver.py",
+    "sha256": "41a5d8107889f39a0af86668cac4fed7c6ebf31171df7ac5e340d447b19ba029"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\solver\\det_engine.py",
+    "destination": "third_party\\deim_engine\\solver\\det_engine.py",
+    "sha256": "075ff7f5d07d3f159d590d249c612196ced95046779cc996c6aa4ee2050b9a8d"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\solver\\det_solver.py",
+    "destination": "third_party\\deim_engine\\solver\\det_solver.py",
+    "sha256": "67444650d63be8afc3e8c3b23919ad69bbfb05bd7940fb9e7c45a92c7727192c"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\solver\\_solver.py",
+    "destination": "third_party\\deim_engine\\solver\\_solver.py",
+    "sha256": "a469128085c55ed4ca8fd4ccb3331c9d839c107a1150e26c1b0a42f392557bdb"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\solver\\__init__.py",
+    "destination": "third_party\\deim_engine\\solver\\__init__.py",
+    "sha256": "e232d6a1bf7fa38af95f8c938b3c80cc5068c93e98e8793b20e460008fe00f02"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\dataset\\coco_dataset.py",
+    "destination": "third_party\\deim_engine\\data\\dataset\\coco_dataset.py",
+    "sha256": "8ff24c73a6fdaa453520aa6cd50148b06c359898d52e49a1a2d2cc1327509e17"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\dataset\\coco_eval.py",
+    "destination": "third_party\\deim_engine\\data\\dataset\\coco_eval.py",
+    "sha256": "117b760f22984cfbb70ff166ce113add3f4d7c49462abefd591f85cedd8c1be8"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\dataset\\coco_utils.py",
+    "destination": "third_party\\deim_engine\\data\\dataset\\coco_utils.py",
+    "sha256": "a1d1d572fbe3fa3aa251faebf9e669acb5494c233b1ca4bf63b154f4e52e23c4"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\dataset\\voc_detection.py",
+    "destination": "third_party\\deim_engine\\data\\dataset\\voc_detection.py",
+    "sha256": "0d3dd4be481d5931c203eec95217cd5d79a477f53da228c5917ba7044e5ccf8e"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\dataset\\voc_eval.py",
+    "destination": "third_party\\deim_engine\\data\\dataset\\voc_eval.py",
+    "sha256": "71ce94eaa171228011f258384f67f5d69216579fbd60587e4c6cd191d2df3c1f"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\dataset\\_dataset.py",
+    "destination": "third_party\\deim_engine\\data\\dataset\\_dataset.py",
+    "sha256": "f37c4745f85fe6d2f12dd1759e742086c043b84c752d24b8be67ed4e489efd5a"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\dataset\\__init__.py",
+    "destination": "third_party\\deim_engine\\data\\dataset\\__init__.py",
+    "sha256": "7bf23c137b73d2ec35ff00a4f36f567c5759cc86f2889f6963b6c2a589b02943"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\transforms\\container.py",
+    "destination": "third_party\\deim_engine\\data\\transforms\\container.py",
+    "sha256": "7d62a14df51cd9de6dfec4482fe980d00a8e0bd7eeac20d3b830341a755a3ef4"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\transforms\\functional.py",
+    "destination": "third_party\\deim_engine\\data\\transforms\\functional.py",
+    "sha256": "b68e508a54340342a5ffe7c12ffa4cb52bc5c0881a69d4111f44ef968518438b"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\transforms\\mosaic.py",
+    "destination": "third_party\\deim_engine\\data\\transforms\\mosaic.py",
+    "sha256": "954e216ea7e8d7afd875831b55935b7c55825461a9df12a7e10c3b1a5957aa7d"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\transforms\\_transforms.py",
+    "destination": "third_party\\deim_engine\\data\\transforms\\_transforms.py",
+    "sha256": "25899f34b1bf157fed695b35e645b24cb81918ca0077eccfe2e8f043ed92a85c"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\third_party\\deim_engine\\data\\transforms\\__init__.py",
+    "destination": "third_party\\deim_engine\\data\\transforms\\__init__.py",
+    "sha256": "8b219dd43fc034e903cd5b3cce8f2585208467a4d063d3c54e7b42323fe7b330"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\README.md",
+    "destination": "docs\\handover_visible\\README.md",
+    "sha256": "d86ade6ed36c751f567b0b5c3cc66a529497f0664178362b0a968a1362a862b4"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\docs\\ARCHITECTURE.md",
+    "destination": "docs\\handover_visible\\ARCHITECTURE.md",
+    "sha256": "2f0bef78f1ac1fd72ec9af6e16d848326969166e6e55c5df3b19e8738a79ea34"
+  },
+  {
+    "source": "D:\\multitask_detection_handover_20261015(1)\\multitask_detection\\docs\\HANDOVER.md",
+    "destination": "docs\\handover_visible\\HANDOVER.md",
+    "sha256": "ffefff657f4bdcf0aed14ff5428bb710eb4247cc8738f188c4d21da75a73cc4c"
+  },
+  {
+    "source": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\rtdetrv2_pytorch\\src\\nn\\backbone\\common.py",
+    "destination": "third_party\\rtdetrv2\\nn\\backbone\\common.py",
+    "sha256": "c4721e8ace22bfd522a39fe0cf259ef528d303c49898e3ecb96fc55b88569dd4"
+  },
+  {
+    "source": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\rtdetrv2_pytorch\\src\\nn\\backbone\\presnet.py",
+    "destination": "third_party\\rtdetrv2\\nn\\backbone\\presnet.py",
+    "sha256": "7b07405d6c3e79ebb50b7940b4b235a8aacea71f1e38018f2d0ffd5b7a10afc8"
+  },
+  {
+    "source": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\rtdetrv2_pytorch\\src\\zoo\\rtdetr\\rtdetr.py",
+    "destination": "third_party\\rtdetrv2\\zoo\\rtdetr\\rtdetr.py",
+    "sha256": "9a827fc91ed2f45a534c71655d71c72eeddee6f5840612a6888b9d23826ca76e"
+  },
+  {
+    "source": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\rtdetrv2_pytorch\\src\\zoo\\rtdetr\\hybrid_encoder.py",
+    "destination": "third_party\\rtdetrv2\\zoo\\rtdetr\\hybrid_encoder.py",
+    "sha256": "355d36099bc511807a00c8c80bf561a8cc0e769f6aa33017543474ea7cab287e"
+  },
+  {
+    "source": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\rtdetrv2_pytorch\\src\\zoo\\rtdetr\\rtdetrv2_decoder.py",
+    "destination": "third_party\\rtdetrv2\\zoo\\rtdetr\\rtdetrv2_decoder.py",
+    "sha256": "8ae7800da2b5b5bb2a28a6eedf5217dfaa6a7d2829dc1a92ad950e875da0721c"
+  },
+  {
+    "source": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\rtdetrv2_pytorch\\src\\zoo\\rtdetr\\rtdetrv2_criterion.py",
+    "destination": "third_party\\rtdetrv2\\zoo\\rtdetr\\rtdetrv2_criterion.py",
+    "sha256": "df149c47e8054831334355b05e03a98cbbd974ba51e0ed08f476ca64b2944b4e"
+  },
+  {
+    "source": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\rtdetrv2_pytorch\\src\\zoo\\rtdetr\\box_ops.py",
+    "destination": "third_party\\rtdetrv2\\zoo\\rtdetr\\box_ops.py",
+    "sha256": "5f24d21f5e252287eb6d6de302f5840f4e120446bc858933a2dd5523a8f0aa91"
+  },
+  {
+    "source": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\rtdetrv2_pytorch\\src\\zoo\\rtdetr\\denoising.py",
+    "destination": "third_party\\rtdetrv2\\zoo\\rtdetr\\denoising.py",
+    "sha256": "764a1e926876ba05176e6cf785edd45842dc4a68649b3b14502faf883f95da74"
+  },
+  {
+    "source": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\rtdetrv2_pytorch\\src\\zoo\\rtdetr\\matcher.py",
+    "destination": "third_party\\rtdetrv2\\zoo\\rtdetr\\matcher.py",
+    "sha256": "11a221ea7a2ad4e728a008ead7f73d1cba3649066f795b2076200c0d41738ad1"
+  },
+  {
+    "source": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\rtdetrv2_pytorch\\src\\zoo\\rtdetr\\utils.py",
+    "destination": "third_party\\rtdetrv2\\zoo\\rtdetr\\utils.py",
+    "sha256": "0de3857351de6e0fd675c0b22410cefa46e1ef7f1330ad8727c242160529cdf0"
+  },
+  {
+    "source": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\sources\\RT-DETR-main\\LICENSE",
+    "destination": "third_party\\rtdetrv2\\LICENSE",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  {
+    "source": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\texture_comparison_20261014\\runs\\r18_recipe_texture_adaptive72_20261014\\v2\\best.pth",
+    "destination": "experiments\\infrared_small_target\\texture_v2_s_imported\\weights\\best.pth",
+    "sha256": "3bb56e7132b582ddf28953501d3546781d14da2884b62f9729cb708a937f5b27"
+  },
+  {
+    "source": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\texture_comparison_20261014\\deployment\\v2\\model_fp16.engine",
+    "destination": "experiments\\infrared_small_target\\texture_v2_s_imported\\deployment\\model_fp16.engine",
+    "sha256": "e090ba572600e2e0bb261ed13f3013562ccc08ebe7d906e6c678f046e62cc7a9"
+  },
+  {
+    "source": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\texture_comparison_20261014\\deployment\\v2\\model_fp16.build.json",
+    "destination": "experiments\\infrared_small_target\\texture_v2_s_imported\\deployment\\model_fp16.build.json",
+    "sha256": "5452ef53caf6fa7be15753d7abe4534ef6116eb89fe204fb81999904cf0fb548"
+  },
+  {
+    "source": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\texture_comparison_20261014\\deployment\\v2\\evaluation_fp16.json",
+    "destination": "experiments\\infrared_small_target\\texture_v2_s_imported\\deployment\\evaluation_fp16.json",
+    "sha256": "a2b9588c5951837d800d7248a655159992f7e971cdfa79cde231f613e2296390"
+  },
+  {
+    "source": "C:\\Users\\NewAdmin\\Documents\\ChatGPT\\红外小目标\\rtdetr_latency_lab_20261009\\model_comparison_20261009\\downloads\\v2_s_coco.pth",
+    "destination": "experiments\\infrared_small_target\\pretrained\\v2_s_coco.pth",
+    "sha256": "2ace52184b620204004509b72752ac7bfe64aadaf7fc1d076b18df8ab5a5c77e"
+  }
+]

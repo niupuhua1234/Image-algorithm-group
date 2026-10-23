@@ -1,0 +1,9 @@
+defaults: [infrared_small_target.yaml]
+data:
+  root: ${INFRARED_BASE_ROOT:-D:/InfraredSmallTargetDetection/datasets/prepared/base}
+deployment:
+  checkpoint: ''
+  checkpoint_sha256: ''
+  engine: ''
+  engine_metadata: ''
+  conf_threshold: null

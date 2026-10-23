@@ -1,0 +1,174 @@
+model:
+  arch: rtdetrv2_s
+  family: detr
+  input_size:
+  - 1024
+  - 1280
+  backbone:
+    depth: 18
+    variant: d
+    return_idx:
+    - 1
+    - 2
+    - 3
+    num_stages: 4
+    freeze_at: -1
+    freeze_norm: true
+    pretrained: false
+  encoder:
+    in_channels:
+    - 128
+    - 256
+    - 512
+    feat_strides:
+    - 8
+    - 16
+    - 32
+    hidden_dim: 256
+    use_encoder_idx:
+    - 2
+    num_encoder_layers: 1
+    nhead: 8
+    dim_feedforward: 1024
+    expansion: 0.5
+    depth_mult: 1
+    dropout: 0.0
+    enc_act: gelu
+    act: silu
+  decoder:
+    feat_channels:
+    - 256
+    - 256
+    - 256
+    feat_strides:
+    - 8
+    - 16
+    - 32
+    hidden_dim: 256
+    num_levels: 3
+    num_layers: 3
+    num_queries: 100
+    num_denoising: 100
+    label_noise_ratio: 0.5
+    box_noise_scale: 1.0
+    eval_idx: -1
+    num_points:
+    - 4
+    - 4
+    - 4
+    cross_attn_method: default
+    query_select_method: default
+loss:
+  family: detr
+  losses:
+  - vfl
+  - boxes
+  weight_dict:
+    loss_vfl: 1
+    loss_bbox: 5
+    loss_giou: 2
+  alpha: 0.75
+  gamma: 2.0
+  matcher:
+    weight_dict:
+      cost_class: 2
+      cost_bbox: 5
+      cost_giou: 2
+    use_focal_loss: true
+    alpha: 0.25
+    gamma: 2.0
+train:
+  trainer: supervised_detection
+  epoches: 72
+  batch_size: 1
+  num_workers: 0
+  precision: fp32
+  seed: 20261009
+  flip_probability: 0.5
+  clip_max_norm: 0.1
+  initialize: experiments/infrared_small_target/pretrained/v2_s_coco.pth
+  ema:
+    decay: 0.9999
+    warmups: 2000
+optimizer:
+  type: AdamW
+  lr: 0.0001
+  backbone_lr: 1.0e-05
+  weight_decay: 0.0001
+scheduler:
+  milestones:
+  - 59
+  - 67
+  gamma: 0.1
+experiment:
+  root: experiments
+  stage: basic
+deployment:
+  input_size:
+  - 1024
+  - 1280
+  default_backend: pytorch
+  backends:
+  - pytorch
+  - tensorrt
+  checkpoint: experiments/infrared_small_target/texture_v2_s_imported/weights/best.pth
+  engine: experiments/infrared_small_target/texture_v2_s_imported/deployment/model_fp16.engine
+  engine_metadata: experiments/infrared_small_target/texture_v2_s_imported/deployment/model_fp16.build.json
+  checkpoint_sha256: 3bb56e7132b582ddf28953501d3546781d14da2884b62f9729cb708a937f5b27
+  conf_threshold: 0.7029354572296143
+  postprocess: confidence_then_optional_nms
+  nms_iou: 0.05
+  trt_library_root: ''
+  precision: fp16
+  topk_box_head: true
+  benchmark:
+    warmup: 10
+    runs: 200
+task:
+  id: infrared_small_target
+  business_name: 红外小目标检测
+  output_spec: 目标框、目标分数、固定标签0
+  native_baseline: AA-YOLO、原RT-DETR-R18vd
+  status: implemented
+classes:
+  names:
+  - target
+  category_id_to_label:
+    0: 0
+data:
+  root: D:/InfraredSmallTargetDetection/datasets/prepared/texture_20261014
+  train:
+    img_folder: images/train
+    ann_file: annotations/instances_train.json
+    batch_size: 1
+    num_workers: 0
+  val:
+    img_folder: images/val
+    ann_file: annotations/instances_val.json
+    batch_size: 1
+    num_workers: 0
+  test:
+    img_folder: images/test
+    ann_file: annotations/instances_test.json
+    batch_size: 1
+    num_workers: 0
+evaluation:
+  protocol: small_target
+  primary_iou: 0.4
+  validation_pd_target: 0.92
+  far:
+    unit: per_detection
+    definition: FP / (TP + FP)
+  size_buckets:
+  - name: tiny
+    min_px: 0
+    max_px: 8
+  - name: small
+    min_px: 8
+    max_px: 16
+  - name: medium
+    min_px: 16
+    max_px: 32
+  - name: large
+    min_px: 32
+    max_px: .inf

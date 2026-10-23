@@ -1,0 +1,32 @@
+deployment:
+  input_size: [1024, 1280]
+  default_backend: pytorch
+  backends: [pytorch, tensorrt]
+  checkpoint: experiments/infrared_recognition/finetune/weights/best.pth
+  checkpoint_sha256: ''
+  conf_threshold: 0.6
+  # 仅用于红外识别部署阈值标定；不参与来源配方的 AP40/Recall 训练选权重。
+  threshold_calibration:
+    run_after_training: true
+    split: val
+    iou_thr: 0.4
+    candidates: {min: 0.01, max: 0.99, step: 0.01}
+    objective: macro_f1
+    tie_breakers: [macro_recall, macro_precision, higher_threshold]
+  postprocess: confidence_then_topk_no_nms
+  nms_iou: null
+  trt_library_root: ${TENSORRT_ROOT:-}
+  trt_layernorm_fp32: true
+tensorrt_selection:
+  # TensorRT 引擎构建与显卡/驱动强绑定，不能阻断已完成的 PyTorch 训练与部署阈值标定。
+  # 需要 TensorRT 复核时，使用红外专用 select_trt.py --force-enable 单独执行。
+  enabled: false
+  precision: fp16
+  layernorm_fp32: true
+  workspace_mib: 2048
+  warmup: 20
+  candidate_topk: 200
+  keep_artifacts: false
+  replace_best: true
+# 红外专用 train.py 会在该临时层完成公共训练，再自动整理为
+# experiments/infrared_recognition/<run-name>/ 的扁平输出目录。
