@@ -1,235 +1,219 @@
-# 红外可见光识别 · DEIM 车辆检测模型
+# vistarget 可见光目标检测 —— 四阶段训练工程
 
-本分支存放 **DEIM(DETR with Improved Matching)车辆检测模型**的完整代码、配置与实验报告,面向无人机 / 航空影像可见光 RGB 图像。
+基于 **DEIM / RT-DETRv2**（PResNet-18 主干）的目标检测训练与类增量学习工程，
+在 `vistarget` 数据集上完成「基础训练 → 迁移学习 → 两阶段类增量」的完整链路。
 
----
+## 一、数据集结构
 
-## 一、模型成绩
+数据集不随仓库提供，需自行准备为如下结构（图片为 JPEG，标注为 COCO json）：
 
-| 指标 | 数值 |
+```
+datasets/vistarget_work/
+├── base/
+│   ├── images/{train,val,test}/*.jpg
+│   └── annotations/{rel_train,rel_val,rel_test}.json
+├── transfer/
+│   ├── images/{train,val,test}/*.jpg
+│   └── annotations/{train,val,test}.json
+├── inc_p1/
+│   ├── images/{train,val,test}/*.jpg
+│   └── annotations/{train_replay,rel_val,rel_test}.json
+└── inc_p2/
+    ├── images/{train,val,test}/*.jpg
+    └── annotations/{train_replay,rel_val,rel_test}.json
+```
+
+**8 个类别（全局统一 id）**
+
+| id | 类别 | 出现在 |
+|---|---|---|
+| 0 | car1 | base / transfer |
+| 1 | car2 | base / transfer |
+| 2 | car3 | base / transfer |
+| 3 | car4 | base / transfer |
+| 4 | military_fuel_tanker | inc_p1 新增 |
+| 5 | radar_vehicle | inc_p1 新增 |
+| 6 | military_motorcycle | inc_p2 新增 |
+| 7 | bridge_layer | inc_p2 新增 |
+
+**关键约定**
+
+- `rel_*.json` 的 `file_name` 是**相对数据集根目录**的路径（如 `base/images/test/VLO0002.jpg`），
+  因此 `img_folder` 统一设为数据集根目录。
+- `inc_p1/inc_p2` 的 `train_replay.json` = 当批新类全部样本 + 从 base / inc_p1 抽取的回放样本。
+
+## 二、四阶段流程
+
+```
+① 基础训练   base      4 类   train 2,800 图   60 epoch
+        ↓ 最优权重
+② 迁移学习   transfer  4 类   train   100 图  120 epoch(few-shot: lr 1e-5 + 冻结 backbone 前段)
+        ↓ 权重 + 分类头扩展 4→6
+③ 类增量 3A  inc_p1    6 类   train 2,100 图   20 epoch(新类 1,050 + 回放 1,050)
+        ↓ 权重 + 分类头扩展 6→8
+④ 类增量 3B  inc_p2    8 类   train 1,154 图   20 epoch(新类 577 + 回放 577)
+```
+
+## 三、关键技术点
+
+| 技术点 | 说明 |
 |---|---|
-| 模型 | **DEIM R18**(PResNet-18-d + HybridEncoder + RTDETRTransformer v2) |
-| 参数量 | **20.09 M** |
-| 类别数 | **6**:car / truck / bus / van / pickup / tank |
-| 数据集 | CAR-UNION v4(多数据集合并,已去重与泄漏核验) |
-| **验收准确率** | **90.36%**(50939 / 56375) |
-| 验证集 mAP@.50:.95 | 0.4048 |
-| 验证集 mAP@.50 | 0.6693 |
-| 单块时延(PyTorch @1024) | 14.7 ms |
-| 单块时延(TensorRT @1024) | **5.57 ms** |
-| 峰值显存 @1024 | 271 MB |
+| **模型** | RT-DETRv2 + PResNet-18-d，3 层解码器，300 查询，100 组去噪 |
+| **训练配比** | DEIM（Dense O2O + Matchability-Aware Loss） |
+| **输入尺寸** | 1280×1280（目标中位仅 29px，960 会压到 14.5px） |
+| **Mosaic** | `output_size=640`（默认 320 会把小目标压到约 1/8 面积） |
+| **分类头扩展** | 必须**同步扩 3 处**：`dec_score_head`、`enc_score_head`、`denoising_class_embed` |
+| **防遗忘** | 回放（按阶段对等配比）+ 冻结 backbone 前段 + 低 lr + 短训练 |
+| **干净评估** | 阈值在 val 上定，test 只跑一次；不用 test 调阈值 |
 
-**验收口径**(项目统一):正确识别 = 类别一致 **且** IoU ≥ 0.40(贪心匹配);准确率 = 正确数 / GT 总数(**recall 式计数,不惩罚误检**)。
+## 四、复现步骤
 
-**分类别准确率**:
-
-| 类别 | 正确 / GT | 准确率 |
-|---|---|---|
-| car | 42,407 / 47,453 | 89.37% |
-| truck | 6,161 / 6,519 | 94.51% |
-| bus | 1,072 / 1,080 | 99.26% |
-| van | 775 / 793 | 97.73% |
-| pickup | 484 / 490 | 98.78% |
-| tank | 40 / 40 | 100.00% |
-
----
-
-## 二、目录结构
-
-```
-.
-├── README.md                      本文件
-├── requirements.txt               依赖清单
-├── .gitignore
-├── docs/                          技术文档
-│   └── DEIM_MODEL_TECHNICAL_DOCUMENT.md    架构 / 超参 / 实测 / 部署(完整)
-├── engines/                       模型引擎
-│   └── deim/                      DEIM 框架(完整可训练/可推理)
-│       ├── engine/                模型定义(backbone / encoder / decoder / 损失 / 匹配)
-│       ├── configs/               配置(含 include 链)
-│       │   └── deim_rtdetrv2/deim_car_union_v4.yml    ← 本模型配置
-│       ├── tools/                 工具脚本
-│       ├── train.py               训练入口
-│       └── patch_tw.py            torchvision 0.26 兼容补丁(必需)
-├── evaluation/                    评估与导出
-│   ├── eval_deploy.py             验收脚本(路径自适应)
-│   └── export_trt.py              TensorRT 导出脚本
-└── reports/                       实验报告
-    └── EXPERIMENT_RESULTS.md      训练 / 验收 / 瓶颈分析 / 改进方向
-```
-
-> **注意**:训练与推理**不需要**改动任何绝对路径 —— `evaluation/*.py` 基于自身位置自动定位 `engines/deim/` 与数据目录。
-
----
-
-## 三、数据与权重下载
-
-> ⚠️ **权重与数据集体积过大,未纳入本仓库**(GitHub 单文件限制 100 MB、仓库建议 < 1 GB),请从下方地址获取。
-
-| 资源 | 体积 | 内容 |
-|---|---|---|
-| **模型权重** | 307 MB | `best_stg1.pth`(EMA 权重,epoch 31) |
-| **数据集 CAR-UNION v4** | **7.35 GB** | train 50,024 块 / val 8,727 块 / test 3,976 块 + COCO 标注 |
-| **测试集切片(仅推理用)** | 615 MB | test 3,976 块 + `annotations.json` |
-
-### 网盘下载
-
-| 项 | 内容 |
-|---|---|
-| **链接** | https://pan.baidu.com/s/1UvH_Una0-D5EiaqR-Q86GQ |
-| **提取码** | `dbye` |
-| 分享名 | 可见光识别_DEIM车辆检测 |
-
-资源以 **8 个压缩包**提供(**单卷均 < 1.9 GB**,避开网盘单文件限制,也便于校验):
-
-| 压缩包 | 大小 | 解压后路径 |
-|---|---|---|
-| `1_模型权重.zip` | 0.32 GB | `weights/best_stg1.pth` |
-| `2_train_part1.zip` | 1.88 GB | `train/*.jpg` |
-| `2_train_part2.zip` | 1.88 GB | `train/*.jpg` |
-| `2_train_part3.zip` | 1.68 GB | `train/*.jpg` |
-| `2_val.zip` | 1.71 GB | `val/*.jpg` |
-| `2_test.zip` | 0.64 GB | `test/*.jpg` |
-| `2_annotations.zip` | 0.10 GB | `annotations/*.json` |
-| `3_测试集切片.zip` | 0.64 GB | `test/*.jpg` |
-
-> **解压方式**:所有压缩包的内部路径已统一为 `weights/`、`train/`、`val/`、`test/`、`annotations/`,
-> **全部解压到同一个目录**即可自动拼成下面的完整结构,不需要手工整理。
->
-> `3_测试集切片.zip` 与 `2_test.zip` 内容相同,是给"只做推理、不要训练集"的人单独准备的,**可跳过**。
-
-**按需下载**:
-
-| 用途 | 需要的压缩包 | 合计 |
-|---|---|---|
-| **只做推理 / 验收** | `1_模型权重.zip` + `3_测试集切片.zip` | **0.96 GB** |
-| **要做训练** | `2_train_part1~3.zip` + `2_val.zip` + `2_annotations.zip` | **7.9 GB** |
-| 完整 | 全部 8 个 | 8.86 GB |
-
-**数据格式**:
-- 图片:切片后的 1280×1280 块(原图 1920×1080,x 方向 stride 640,每图 2 块)
-- 标注:训练用 COCO JSON,评估用 `annotations.json`
-
-**放置位置**(下载后按此结构摆放,脚本即可直接运行):
-
-```
-<仓库根目录>/
-├── engines/deim/          ← 仓库自带
-├── evaluation/            ← 仓库自带
-├── weights/
-│   └── best_stg1.pth      ← 从网盘下载
-└── test/
-    ├── images/            ← 从网盘下载(3976 张)
-    └── annotations.json   ← 从网盘下载
-```
-
----
-
-## 四、环境依赖
+### 1. 环境
 
 ```bash
-# 实测可用组合
-torch==2.11.0+cu128
-torchvision==0.26.0+cu128
-numpy / Pillow / PyYAML / tqdm
-faster-coco-eval
-# 可选(TensorRT 加速)
-tensorrt==11.2.1.2
-```
-
-安装(按本机 CUDA 版本调整):
-
-```bash
-pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
 pip install -r requirements.txt
 ```
 
-> **重要**:`engines/deim/patch_tw.py` 是**必需的** —— 它修补 torchvision 0.26 的 `Transform.forward` 接口变更(DEIM 使用旧式 `_transform` 接口)。若报 `NotImplementedError: _transform`,就是这个补丁没生效。`eval_deploy.py` 会自动加载它。
+实测环境：Python 3.10.21 / PyTorch 2.11.0+cu128 / RTX 5080 16GB（Windows WDDM）
 
----
-
-## 五、快速开始
-
-### 5.1 验收测试
+### 2. 数据预处理
 
 ```bash
-# 在仓库根目录执行
-python evaluation/eval_deploy.py                 # 默认 conf 0.005(验收口径)
-python evaluation/eval_deploy.py --scan          # 扫描多个置信度阈值
-python evaluation/eval_deploy.py --imgsz 1280    # 改推理分辨率
-
-# 手动指定路径
-python evaluation/eval_deploy.py \
-    --ckpt weights/best_stg1.pth \
-    --json test/annotations.json \
-    --imgroot test/images
+python scripts/prep_vistarget_base.py
+python scripts/prep_vistarget_transfer.py
+python scripts/prep_vistarget_inc.py
+python scripts/build_inc_replay.py
 ```
 
-**预期输出**:
-
-```
-test 块数=3976 GT目标=56375
-conf=0.005: acc=0.9036 (50939/56375)  avg_ms=15.2  mean_score=0.080
-  car       : 42407/47453 = 89.37%
-  truck     : 6161/6519 = 94.51%
-  ...
-```
-
-### 5.2 TensorRT 加速
-
-> ⚠️ **engine 与 GPU 架构绑定,不能跨机器拷贝** —— 必须在目标机器上重新导出。
+### 3. 数据体检与泄露核查
 
 ```bash
-python evaluation/export_trt.py --imgsz 1024
+python scripts/profile_base.py      # 尺寸/类别/引用一致性
+python scripts/audit_leakage.py     # 五级泄露核查
 ```
 
-导出时**必须完全定形**(固定 batch 与 H/W、无 `dynamic_axes`),否则会报
-`Could not find any implementation for node ForeignNode[.../decoder/Gather_N]`。
-
-### 5.3 训练
+### 4. 训练
 
 ```bash
-cd engines/deim
-python train.py -c configs/deim_rtdetrv2/deim_car_union_v4.yml \
-    -d cuda:0 --use-amp -u epoches=45
+# 阶段 1
+python train.py -c configs/deim_rtdetrv2/deim_vistarget_base.yml -d cuda:0 --use-amp
+
+# 阶段 2
+python train.py -c configs/deim_rtdetrv2/deim_vistarget_transfer.yml -d cuda:0 --use-amp \
+    -t output/deim_vistarget_base/best_stg1.pth
+
+# 阶段 3(必须先扩头)
+python scripts/expand_head.py \
+    --config configs/deim_rtdetrv2/deim_vistarget_transfer.yml \
+    --ckpt output/deim_vistarget_transfer/best_stg1.pth \
+    --new-num-classes 6 \
+    --out-ckpt output/inc_p1_init.pth \
+    --out-config configs/deim_rtdetrv2/deim_vistarget_inc_p1_init.yml
+python train.py -c configs/deim_rtdetrv2/deim_vistarget_inc_p1.yml -d cuda:0 --use-amp \
+    -t output/inc_p1_init.pth
+
+# 阶段 4(同样先扩头)
+python scripts/expand_head.py \
+    --config configs/deim_rtdetrv2/deim_vistarget_inc_p1.yml \
+    --ckpt output/deim_vistarget_inc_p1/best_stg1.pth \
+    --new-num-classes 8 \
+    --out-ckpt output/inc_p2_init.pth \
+    --out-config configs/deim_rtdetrv2/deim_vistarget_inc_p2_init.yml
+python train.py -c configs/deim_rtdetrv2/deim_vistarget_inc_p2.yml -d cuda:0 --use-amp \
+    -t output/inc_p2_init.pth
 ```
 
-**关键超参**:
+### 5. 评估
 
-| 参数 | 值 |
-|---|---|
-| lr | 2e-4(AdamW) |
-| weight_decay | 1e-4(norm/bn 层为 0) |
-| epoches | 45 |
-| LR 调度 | flatcosine(warmup 2000 步,flat_epoch 24,no_aug 2) |
-| batch | 8 |
-| 输入尺寸 | 960 × 960 |
-| 增强策略 | `policy: epoch [4, 24, 43]` |
+```bash
+# 干净评估(val 定阈值 → test 验证),推荐
+python scripts/verify_val_to_test.py \
+    --config configs/deim_rtdetrv2/deim_vistarget_base.yml \
+    --ckpt output/deim_vistarget_base/best_stg1.pth \
+    --tag base --grid "0.10:0.90:0.02"
 
----
+# 全局阈值扫描(在 test 上扫会引入阈值泄漏,仅用于分析)
+python tools/sweep_conf.py \
+    --config configs/deim_rtdetrv2/deim_vistarget_base.yml \
+    --ckpt output/deim_vistarget_base/best_stg1.pth \
+    --split test --conf-grid "0.30:0.60:0.02"
+
+# 按类别定阈值
+python scripts/per_class_threshold.py \
+    --config configs/deim_rtdetrv2/deim_vistarget_inc_p2.yml \
+    --ckpt output/deim_vistarget_inc_p2/best_stg1.pth --tag inc_p2 \
+    --ann-val <val.json> --ann-test <test.json> --img-dir <root>
+```
+
+### 6. 时延测量
+
+```bash
+python scripts/bench_latency_fast.py \
+    --config configs/deim_rtdetrv2/deim_vistarget_base.yml \
+    --ckpt output/deim_vistarget_base/best_stg1.pth \
+    --tag base --n-run 200 --workers 8
+```
+
+## 五、实验结果
+
+**评估口径**：置信度阈值在 **val** 上确定（选 recall 达标前提下误检最少的点），
+再用该阈值在 **test** 上跑一次。test 不参与任何选择。
+
+### 5.1 各阶段主指标
+
+| 阶段 | 类别数 | 训练图 | 评价集 | conf | **recall** | precision | 误检/图 |
+|---|---|---|---|---|---|---|---|
+| **base** | 4 | 2,800 | 595图/2194框 | 0.640 | **93.25%** | **98.41%** | **0.06** |
+| transfer | 4 | 100 | 687图/2084框 | 0.300 | 89.01% | 61.10% | 1.72 |
+| 3A | 6 | 2,100 | 224图/887框 | 0.340 | 88.61% | 71.78% | 1.38 |
+| **3B** | 8 | 1,154 | 123图/483框 | 0.500 | **92.55%** | **92.74%** | **0.28** |
+
+### 5.2 遗忘检查（老类回归，base 4 类）
+
+| 阶段 | conf | recall | precision | 相对上一阶段 |
+|---|---|---|---|---|
+| base | 0.640 | **93.25%** | 98.41% | — |
+| transfer 后 | 0.660 | 92.53% | 98.26% | −0.72 pp |
+| 3A 后 | 0.720 | 90.93% | 98.32% | −1.60 pp |
+| 3B 后 | 0.650 | 91.57% | 97.01% | +0.64 pp |
+
+**累计掉点 1.68pp，低于 3pp 门槛。**
+
+### 5.3 时延（RTX 5080，1280 输入）
+
+| 配置 | forward | 预处理 | **端到端 mean** | **p95** |
+|---|---|---|---|---|
+| HDD + 串行预处理（修复前） | 12.02 | 24.55 | 36.57 | **40.49** |
+| **HDD + 并行预处理** | 12.71 | 3.06 | **15.77** | **31.91** |
+| 内存预加载 | 12.13 | 1.65 | 13.78 | 14.15 |
+
+**机械硬盘上端到端 p95 = 31.91ms，满足 <40ms 要求。**
 
 ## 六、已知限制
 
-| 限制 | 说明 | 缓解方式 |
-|---|---|---|
-| 小目标能力受骨干 stride 限制 | 目标 < 32px 时召回下降(car 有 50.6% < 32px) | **滑窗切片推理**,实测在 DOTA 目标域 +16pp |
-| 300 queries 上限 | 单块最多 963 个目标,>300 的 9 张块占 9.4% GT,物理上检不全 | 滑窗切片(每窗目标数下降)或提高 `num_queries` |
-| 误检量大 | 本口径不惩罚误检,test 上 Precision 仅 4.68% | 提高 conf 到 0.20~0.30(Precision 53%~68%) |
-| Mosaic output_size 偏小 | `320` 会压缩小目标细节 | 训练时改 640 并降低概率 |
-
-**详细分析与改进路线见**:
-- `reports/EXPERIMENT_RESULTS.md`(实验数据、瓶颈量化、改进方案)
-- `docs/DEIM_MODEL_TECHNICAL_DOCUMENT.md`(架构、输入输出、后处理、部署)
-
----
-
-## 七、版本与来源
-
-| 项 | 值 |
+| 项 | 说明 |
 |---|---|
-| 框架 | DEIM(DETR with Improved Matching) |
-| 基座 | RT-DETRv2 |
-| 骨干 | PResNet-18-d(COCO 120ep 预训练) |
-| 训练日期 | 2026-09-10 ~ 09-12 |
-| 权重时间 | 2026-09-11 19:12(epoch 31) |
-| 训练平台 | RTX 5080 16GB |
+| **场景级共享** | 数据集仅含 2 个场景（VLP/VLO）+ 4 个采集序列，所有划分均在这些场景内按帧切分，指标可能偏乐观 |
+| **transfer 数据量** | 训练集仅 100 张（train:test = 1:6.87），该阶段指标主要受数据量制约 |
+| **3A 目标极小** | 新类目标中位 24~26px（96% 小于 32px），是 3A 弱于 3B 的根因 |
+| **按类别定阈值** | 仅在类别间置信度差异明显时有效（3B 上 precision +1.35pp，base/3A 反而变差） |
+
+## 七、目录说明
+
+```
+.
+├── engine/                     DEIM 训练引擎
+├── configs/
+│   ├── base/                   基础配置(include 依赖)
+│   └── deim_rtdetrv2/          本项目 8 个配置
+├── scripts/                    数据预处理 / 核查 / 评估 / 流水线
+├── tools/                      conf 扫描工具
+├── docs/                       实验汇报
+├── train.py                    训练入口
+└── patch_tw.py                 torchvision.transforms.v2 兼容补丁
+```
+
+## 八、参考
+
+- DEIM: *DETR with Improved Matching for Fast Convergence* (CVPR 2025)
+- RT-DETRv2: *Bag-of-Freebies* (arXiv 2407.17140)
